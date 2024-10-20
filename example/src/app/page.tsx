@@ -8,9 +8,7 @@ export default function Home() {
             </div>
 
             <div>
-                <h1 className="text-4xl font-bold">
-                    Hello From CyHip-Dynamic-Themes
-                </h1>
+                <h1 className="text-5xl font-bold">CyHip Dynamic Themes</h1>
             </div>
         </main>
     );
