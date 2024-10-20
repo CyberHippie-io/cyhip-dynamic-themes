@@ -4,8 +4,15 @@
 
 @layer base {
     :root {
+        /* oklch vars - Applied by dynamic accent colors */
         --background: oklch(var(--accent-100));
         --foreground: oklch(var(--accent-950));
+        --primary: oklch(var(--accent-500));
+        --primary-foreground: oklch(var(--accent-50));
+
+        /* hsl vars */
+        --muted: hsl(240 4.8% 95.9%);
+        --muted-foreground: hsl(240 3.8% 45%);
     }
     * {
         margin: 0;
@@ -16,8 +23,15 @@
 }
 
 .dark {
+    /* oklch vars - Applied by dynamic accent colors */
     --background: oklch(var(--accent-900));
     --foreground: oklch(var(--accent-100));
+    --primary: oklch(var(--accent-500));
+    --primary-foreground: oklch(var(--accent-50));
+
+    /* hsl vars */
+    --muted: hsl(240 4.8% 30%);
+    --muted-foreground: hsl(240 3.8% 70%);
 }
 
 body {
