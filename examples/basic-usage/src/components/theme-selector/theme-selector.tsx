@@ -1,13 +1,13 @@
-"use client";
-import { forwardRef, HTMLAttributes, useEffect, useState } from "react";
+import { HTMLAttributes, forwardRef, useEffect, useState } from "react";
 
-import { defaultHueScheme, useColorTheme } from "cyhip-dynamic-themes";
+import { useColorTheme } from "cyhip-dynamic-themes";
 
 const ThemeMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     ({ className, ...props }, ref) => {
         const [isMounted, setIsMounted] = useState(false);
-        const darkMode = true;
-        const hue = defaultHueScheme.purple;
+
+        const darkMode = false;
+        const hue = "250";
         const { setTheme } = useColorTheme(hue, darkMode);
 
         useEffect(() => {

@@ -1,0 +1,26 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --background: oklch(var(--accent-100));
+        --foreground: oklch(var(--accent-950));
+    }
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        @apply outline-accent-500 dark:outline-accent-400;
+    }
+}
+
+.dark {
+    --background: oklch(var(--accent-900));
+    --foreground: oklch(var(--accent-100));
+}
+
+body {
+    background-color: var(--background);
+    color: var(--foreground);
+}
