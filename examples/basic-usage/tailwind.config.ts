@@ -19,10 +19,17 @@ export default {
                     DEFAULT: "var(--primary)",
                     foreground: "var(--primary-foreground)",
                 },
+                secondary: {
+                    DEFAULT: "var(--secondary)",
+                    foreground: "var(--foreground)",
+                },
                 muted: {
                     DEFAULT: "var(--muted)",
                     foreground: "var(--muted-foreground)",
                 },
+                border: "var(--border)",
+                ring: "var(--ring)",
+                input: "var(--input)",
             },
         },
     },

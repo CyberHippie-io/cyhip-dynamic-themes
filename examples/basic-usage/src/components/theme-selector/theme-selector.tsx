@@ -25,8 +25,9 @@ const ThemeMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
         }, []);
 
         return (
-            <div ref={ref} className={className} {...props}>
+            <div ref={ref} className={cn(className)} {...props}>
                 <p className="text-center mb-4">Mode</p>
+
                 <div className="theme-mode-selector grid grid-cols-2 gap-x-4">
                     <div>
                         <button
