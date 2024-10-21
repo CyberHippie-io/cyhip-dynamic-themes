@@ -31,7 +31,10 @@ export const SignUp = (props: React.HTMLAttributes<HTMLDivElement>) => {
                         <GitHubIcon className="mr-1 h-4 w-4" />
                         <span>Github</span>
                     </Button>
-                    <Button variant="outline" className="flex space-x-2">
+                    <Button
+                        variant="outline"
+                        className="flex space-x-2 text-bold"
+                    >
                         <GoogleIcon className="mr-1 h-4 w-4" />
                         <span>Google</span>
                     </Button>

@@ -5,6 +5,7 @@
     @apply ring-zinc-500;
     @apply transition-all duration-150 ease-in-out;
     @apply text-zinc-500;
+    @apply bg-white;
 }
 
 ._button__active {

@@ -11,7 +11,10 @@ function App() {
             <div className="fixed inset-y-1/4 right-48 w-96 h-96 rounded-full rotate-45 bg-gradient-to-b from-accent-400/30 to-accent-50/5 blur-3xl -z-50" />
             {/* main */}
             <main className=" grid grid-cols-1 justify-center items-center">
-                <Banner className="h-[25vh] flex flex-col justify-end mb-16" />
+                <div className="mx-auto">
+                    <Banner className="h-[25vh]" />
+                </div>
+
                 <div className="flex flex-col items-center">
                     <ThemeMenu />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-8 items-center justify-center p-4">
@@ -23,7 +26,15 @@ function App() {
             <footer>
                 <div className="grid justify-center items-center h-16 mb-4">
                     <p className="text-center text-sm text-muted-foreground rounded px-10 py-4 bg-accent-200/30 dark:bg-accent-950/50">
-                        Crafted by CyHIP - @KassioRF
+                        by{" "}
+                        <a
+                            href="https://github.com/KassioRF"
+                            className="font-bold hover:underline"
+                            target="_blank"
+                        >
+                            @KassioRF
+                        </a>{" "}
+                        | Cyhip Packages
                     </p>
                 </div>
             </footer>

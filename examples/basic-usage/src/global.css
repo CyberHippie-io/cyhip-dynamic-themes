@@ -1,9 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Yantramanav:wght@100;300;400;500;700;900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
     :root {
+        /* --font-family: "Outfit", sans-serif; */
+        --font-family: "Yantramanav", sans-serif;
         /* oklch vars - Applied by dynamic accent colors */
         --background: oklch(var(--accent-100));
         --foreground: oklch(var(--accent-900));
@@ -38,7 +41,7 @@
     --background: oklch(var(--accent-900));
     --foreground: oklch(var(--accent-100));
     --primary: oklch(var(--accent-500));
-    --primary-foreground: oklch(var(--accent-50));
+    --primary-foreground: oklch(var(--accent-100));
     --box-shadow: oklch(var(--accent-100) / 0.15);
     --border: oklch(var(--accent-100) / 0.4);
 

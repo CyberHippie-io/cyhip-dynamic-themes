@@ -8,6 +8,10 @@ export default {
     darkMode: "selector",
     theme: {
         extend: {
+            fontFamily: {
+                sans: ["var(--font-family)"],
+            },
+
             colors: {
                 accent: dynamicTwClasses("accent", 250),
                 white: colors.white,

@@ -31,7 +31,7 @@ const ThemeMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
             <div
                 ref={ref}
                 className={cn(
-                    "relative m-auto bg-white border px-8 py-5 shadow rounded grid gird-rows-2 gap-y-2",
+                    "relative m-auto background-blur-3xl bg-white  px-8 py-5 shadow rounded grid gird-rows-2 gap-y-2",
                     className
                 )}
                 {...props}
