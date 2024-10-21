@@ -1,0 +1,11 @@
+{
+    "name": "cyhip-dynamic-themes",
+    "private": true,
+    "workspaces": [
+        "cyhip-dynamic-themes",
+        "examples/*"
+    ],
+    "devDependencies": {
+        "pnpm": "^9.0.0"
+    }
+}
