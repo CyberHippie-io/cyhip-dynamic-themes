@@ -41,7 +41,7 @@
     --background: oklch(var(--accent-900));
     --foreground: oklch(var(--accent-100));
     --primary: oklch(var(--accent-500));
-    --primary-foreground: oklch(var(--accent-100));
+    --primary-foreground: oklch(var(--accent-50));
     --box-shadow: oklch(var(--accent-100) / 0.15);
     --border: oklch(var(--accent-100) / 0.4);
 
