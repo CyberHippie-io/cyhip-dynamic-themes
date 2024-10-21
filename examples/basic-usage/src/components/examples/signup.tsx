@@ -17,10 +17,7 @@ export const SignUp = (props: React.HTMLAttributes<HTMLDivElement>) => {
     return (
         <Card
             {...props}
-            className={cn(
-                props.className,
-                "flex flex-col rounded shadow space-y-4"
-            )}
+            className={cn(props.className, "flex flex-col rounded space-y-4")}
         >
             <CardHeader className="space-y-1">
                 <CardTitle className="text-2xl">Create an account</CardTitle>

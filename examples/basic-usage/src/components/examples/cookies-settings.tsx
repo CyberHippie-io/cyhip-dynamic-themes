@@ -14,10 +14,7 @@ import { Switch } from "~/ui/switch/switch";
 export const CookieSettings = (props: React.HTMLAttributes<HTMLDivElement>) => {
     return (
         <Card
-            className={cn(
-                props.className,
-                "flex flex-col rounded shadow space-y-4"
-            )}
+            className={cn(props.className, "flex flex-col rounded space-y-4")}
         >
             <CardHeader>
                 <CardTitle className="text-2xl">Cookie Settings</CardTitle>

@@ -1,18 +1,21 @@
 import { HTMLAttributes, forwardRef, useEffect, useState } from "react";
 
-import { defaultHueScheme, useColorTheme } from "cyhip-dynamic-themes";
-import { cn } from "~/lib/utils";
+import { useColorTheme } from "cyhip-dynamic-themes";
+import { hueScheme } from "~/hueThemes";
+import { capitalize, cn } from "~/lib/utils";
+import { CheckDot } from "~/ui/check-dot/check-dot";
+import { ColorPaletteIcon } from "~/ui/icons/colorPalette";
 import { MoonIcon } from "~/ui/icons/moon";
 import { SolarIcon } from "~/ui/icons/solar";
-
 import styles from "./theme-selector.module.css";
+import { availableThemes } from "./themeSamples";
 
 const ThemeMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     ({ className, ...props }, ref) => {
         const [isMounted, setIsMounted] = useState(false);
 
         const [darkMode, setDarkMode] = useState(false);
-        const hue = defaultHueScheme.blue;
+        const [hue, setHue] = useState(hueScheme.blue);
         const { setTheme } = useColorTheme(hue, darkMode);
 
         useEffect(() => {
@@ -25,36 +28,75 @@ const ThemeMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
         }, []);
 
         return (
-            <div ref={ref} className={cn(className)} {...props}>
-                <p className="text-center mb-4">Mode</p>
+            <div
+                ref={ref}
+                className={cn(
+                    "relative m-auto bg-white border px-8 py-5 shadow rounded grid gird-rows-2 gap-y-2",
+                    className
+                )}
+                {...props}
+            >
+                <span
+                    className={cn(
+                        "w-16 h-16 rounded-full bg-white shadow shadow-accent-950/20 absolute  top-0 left-0 -mt-6 -ml-10 "
+                    )}
+                >
+                    <ColorPaletteIcon className={cn("drop-shadow-sm")} />
+                </span>
 
-                <div className="theme-mode-selector grid grid-cols-2 gap-x-4">
-                    <div>
+                <div className="palette-selectors grid grid-cols-2 md:grid-cols-3 grid-flow-row gap-x-4 gap-y-2 mb-2">
+                    {Object.entries(hueScheme).map(([key, value]) => (
                         <button
+                            key={key}
                             className={cn(
                                 styles._button,
-                                !darkMode ? styles._button__active : "",
+                                hue === value ? styles._button__active : "",
                                 "flex items-center gap-x-2"
                             )}
-                            onClick={() => setDarkMode(false)}
+                            onClick={() => setHue(value)}
                         >
-                            <SolarIcon className="h-4 w-4 " />
-                            Light
+                            <span>
+                                <CheckDot
+                                    className="w-5 h-5 rounded-full"
+                                    style={{
+                                        background: availableThemes[key],
+                                    }}
+                                    selected={hue === value}
+                                />
+                            </span>
+
+                            <span>
+                                {key == "monoCromatic"
+                                    ? "Default"
+                                    : capitalize(key)}
+                            </span>
                         </button>
-                    </div>
-                    <div>
-                        <button
-                            className={cn(
-                                styles._button,
-                                darkMode ? styles._button__active : "",
-                                "flex items-center gap-x-2"
-                            )}
-                            onClick={() => setDarkMode(true)}
-                        >
-                            <MoonIcon className="h-4 w-4 " />
-                            Dark
-                        </button>
-                    </div>
+                    ))}
+                </div>
+                <div className="flex justify-center gap-4">
+                    <button
+                        className={cn(
+                            styles._button,
+                            !darkMode ? styles._button__active : "",
+                            "flex items-center gap-x-2"
+                        )}
+                        onClick={() => setDarkMode(false)}
+                    >
+                        <SolarIcon className="h-4 w-4 " />
+                        Light
+                    </button>
+
+                    <button
+                        className={cn(
+                            styles._button,
+                            darkMode ? styles._button__active : "",
+                            "flex items-center gap-x-2"
+                        )}
+                        onClick={() => setDarkMode(true)}
+                    >
+                        <MoonIcon className="h-4 w-4 " />
+                        Dark
+                    </button>
                 </div>
             </div>
         );
