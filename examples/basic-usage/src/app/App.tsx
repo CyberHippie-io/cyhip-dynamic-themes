@@ -5,8 +5,8 @@ import { ThemeMenu } from "~/components/theme-selector/theme-selector";
 
 function App() {
     return (
-        <main className="h-screen grid justify-center">
-            <div className="grid grid-rows-2 gap-y-4 justify-center">
+        <main className="h-screen grid justify-center items-center my-10">
+            <div className="grid grid-rows-2 justify-center items-center pb-10 px-4 ">
                 <Banner />
                 <ThemeMenu />
             </div>
