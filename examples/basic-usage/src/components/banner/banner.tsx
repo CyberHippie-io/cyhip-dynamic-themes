@@ -4,10 +4,12 @@ import { CheckIcon } from "~/ui/icons/check";
 import { ClipboardIcon } from "~/ui/icons/clipboard";
 import { GitHubIcon } from "~/ui/icons/github";
 
+import { version } from "cyhip-dynamic-themes";
+
 const Banner = (props: React.HTMLAttributes<HTMLDivElement>) => {
     const [toClipBoard, setToClipBoard] = useState(false);
 
-    const pkgVersion = "0.0.1";
+    const pkgVersion = version;
     const npmInstall = "npm install cyhip-dynamic-themes";
 
     const copyToClipboard = () => {
@@ -28,16 +30,16 @@ const Banner = (props: React.HTMLAttributes<HTMLDivElement>) => {
                 <samp className="bg-accent-600/50 text-accent-100 my-2 rounded-3xl w-fit p-1 px-2 text-xs">
                     v{pkgVersion}
                 </samp>
-                <h1 className="text-3xl font-bold mb-2 text-accent-800 dark:text-accent-100">
+                <h1 className="text-4xl font-bold mb-2 text-accent-800 dark:text-accent-100">
                     Cyhip Dynamic Themes
                 </h1>
-                <h2 className="text-lg">
-                    Use dynamic themes with Tailwind CSS and React
+                <h2 className="text-xl">
+                    Tailwind-powered dynamic color themes for React apps.
                 </h2>
             </div>
 
             {/* npm how to install with clipboard */}
-            <div className="grid grid-cols-1 gap-y-4 text-sm mx-auto">
+            <div className="grid grid-cols-1 gap-y-4 mx-auto">
                 <button
                     className="flex flex-row justify-center items-center mt-2 space-x-4 border py-1 px-4 rounded-lg bg-accent-950/90 text-zinc-200 hover:shadow-md hover:bg-accent-900/90"
                     onClick={() => copyToClipboard()}
