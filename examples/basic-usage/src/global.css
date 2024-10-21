@@ -13,9 +13,9 @@
         --secondary-foreground: oklch(var(--accent-200));
         --ring: oklch(var(--accent-500));
         --box-shadow: oklch(var(--accent-800) / 0.15);
-
+        --border: oklch(var(--accent-900) / 0.2);
         /* hsl vars */
-        --border: hsl(240 5.9% 90%);
+        /* --border: hsl(240 5.9% 90%); */
         --muted: hsl(240 4.8% 95.9%);
         --muted-foreground: hsl(240 3.8% 45%);
         --input: hsl(240 5.9% 80%);
@@ -40,10 +40,9 @@
     --primary: oklch(var(--accent-500));
     --primary-foreground: oklch(var(--accent-50));
     --box-shadow: oklch(var(--accent-100) / 0.15);
+    --border: oklch(var(--accent-100) / 0.4);
 
     /* hsl vars */
-    /* --border: hsl(240 3.7% 65%); */
-    --border: oklch(var(--accent-100) / 0.4);
     --muted: hsl(240 4.8% 30%);
     --muted-foreground: hsl(240 3.8% 70%);
 }
