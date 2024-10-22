@@ -2,4 +2,8 @@
 .vscode
 **/dist
 
+examples/dev_lab
+
+bkp/
+
 TODO.md
