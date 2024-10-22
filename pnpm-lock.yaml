@@ -58,7 +58,7 @@ importers:
         specifier: ^22.7.7
         version: 22.7.7
       cyhip-dynamic-themes:
-        specifier: workspace:*
+        specifier: ^0.1.1
         version: link:../../cyhip-dynamic-themes
       react:
         specifier: ^18.3.1

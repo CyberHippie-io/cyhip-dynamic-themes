@@ -21,7 +21,11 @@ Default files created in "./themes".
   - See how to enable accent vars on tailwind.config.ts on "./color-themes.ts".
 ```
 
-All files here can be modified as you wish. Read the description of each one in their respective files.
+All files here can be modified as you wish. Read the **description** of each one in **their respective files**.
+
+### Update global css file.
+
+update your project's **global css** with the contents of `./theme/root.css`
 
 ### Update your tailwind.config.ts file.
 
@@ -40,5 +44,3 @@ export default {
    plugins: [],
 } satisfies Config;
 ```
-
-### Update your global css file.

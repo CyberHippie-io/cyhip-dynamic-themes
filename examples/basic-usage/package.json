@@ -14,9 +14,9 @@
         "@radix-ui/react-slot": "^1.1.0",
         "@radix-ui/react-switch": "^1.1.1",
         "@types/node": "^22.7.7",
+        "cyhip-dynamic-themes": "^0.1.1",
         "react": "^18.3.1",
-        "react-dom": "^18.3.1",
-        "cyhip-dynamic-themes": "workspace:*"
+        "react-dom": "^18.3.1"
     },
     "devDependencies": {
         "@babel/types": "^7.25.8",
