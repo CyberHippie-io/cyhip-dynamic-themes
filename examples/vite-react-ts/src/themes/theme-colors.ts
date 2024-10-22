@@ -1,13 +1,13 @@
 /**
  * COLORS
- *
+ * 
  * You can use this on tailwindcss.config.ts as follows:
- *
+ * 
  *   import type { Config } from "tailwindcss";
  *   import { themeColors } from "./src/themes/theme-colors";
  *
  *   export default {
- *       content: ["./index.html", ".\\src\\**\\*.{js,ts,jsx,tsx}"],
+ *       content: ["./index.html", ".\src\**\*.{js,ts,jsx,tsx}"],
  *       darkMode: "class",
  *       theme: {
  *           extend: {
@@ -17,11 +17,11 @@
  *       plugins: [],
  *   } satisfies Config;
  *
- *
+ * 
  */
 
-import { dynamicTwClasses } from "cyhip-dynamic-themes";
 import colors from "tailwindcss/colors";
+import { dynamicTwClasses } from "cyhip-dynamic-themes";
 
 export const themeColors = {
     // accent vars to allow dynamic color changes
