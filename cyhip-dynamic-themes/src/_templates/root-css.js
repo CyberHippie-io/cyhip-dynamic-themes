@@ -1,4 +1,4 @@
-export const rootCss = `
+const rootCss = `
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -60,3 +60,5 @@ body {
     color: var(--foreground);
 }
 `;
+
+export default rootCss;
