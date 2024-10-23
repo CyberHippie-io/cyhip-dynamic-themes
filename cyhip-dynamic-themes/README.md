@@ -26,7 +26,7 @@ yarn add cyhip-dynamic-themes
 
 ### Prerequisites
 
-Ensure you have Tailwind CSS installed in your project and a tailwind.config.ts file in your root directory.
+Ensure you have Tailwind CSS installed in your project and a `tailwind.config.ts `file in your root directory.
 
 ### Initialize Theme basic files
 
@@ -94,20 +94,35 @@ createRoot(document.getElementById("root")!).render(
 Switching the main color palette can be done using the `ThemeSwitcher` component. Here's a basic example to illustrate its use:
 
 ```tsx
-// src/main.tsx
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
+// App.tsx
+import { ThemeSwitcher } from "./themes/theme-switcher";
+function App() {
+    return (
+        <>
+            <main className="h-screen flex flex-col justify-center items-center gap-y-14">
+                <h1 className="text-4xl font-bold text-center">
+                    Cyhip Dynamic Themes - Basic Usage
+                </h1>
+                <ThemeSwitcher />
+                <div className="bg-accent-200/40 dark:bg-accent-700/40 grid grid-cols-1 gap-6 p-4">
+                    <button className="bg-primary text-primary-foreground px-5 py-2 shadow rounded-sm font-medium mx-auto">
+                        Button
+                    </button>
+                    <samp className="bg-accent-950/80 text-accent-100/90 text-sm rounded-sm px-4 py-1 shadow">
+                        className="bg-primary text-primary-foreground ..."
+                    </samp>
+                </div>
+            </main>
+        </>
+    );
+}
 
-// Import CSS
-import "./themes/root.css";
-
-createRoot(document.getElementById("root")!).render(
-    <StrictMode>
-        <App />
-    </StrictMode>
-);
+export default App;
 ```
+
+Check the `/templates/theme-switcher.tsx` component to see how to initialize and alternate themes.
+
+Finally, take a look on the last example and see how we can combine the accent variable with tailwind classes like `bg-accent-<value>` and `text-accent-<value>`.
 
 ## Defining Color Palettes Based on Hue
 
