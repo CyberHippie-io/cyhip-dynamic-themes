@@ -7,10 +7,10 @@
 
 ## Features
 
--   **Dynamic Color Theming**: Utilize OKLCH colors for vibrant and accurate color representations.
+-   **Dynamic Color Theming**: Allow your users to switch the color theme of your application in a simple and practical way.
 -   **Dark Mode Support**: Easily switch between light and dark modes across your custom themes.
 
-Inspired by the excellent [article](https://evilmartians.com/chronicles/better-dynamic-themes-in-tailwind-with-oklch-color-magic) by Dan Kozlov and Travis Turner, this package integrates seamlessly with their [tw-dynamic-themes](https://github.com/dkzlv/tw-dynamic-themes) library to manage dynamic CSS variables effectively.
+Inspired by the excellent [article](https://evilmartians.com/chronicles/better-dynamic-themes-in-tailwind-with-oklch-color-magic) by Dan Kozlov and Travis Turner, this package uses the library provided by them which provides a series of features for handling colors and defining dynamic css variables. Take a look at:. [https://github.com/dkzlv/tw-dynamic-themes](https://github.com/dkzlv/tw-dynamic-themes)
 
 ## Installation
 
@@ -26,7 +26,7 @@ yarn add cyhip-dynamic-themes
 
 ### Prerequisites
 
-Ensure you have Tailwind CSS installed in your project and a `tailwind.config.ts `file in your root directory.
+Ensure you have Tailwind CSS installed in your project and the `tailwind.config.ts` and `postcss.config.mjs` files in your root directory.
 
 ### Initialize Theme basic files
 
