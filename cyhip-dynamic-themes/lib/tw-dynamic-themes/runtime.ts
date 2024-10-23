@@ -19,17 +19,16 @@ export function getVariables({
     baseName,
     hue,
     mode = "consistent",
-    monoCromatic = false,
 }: {
     baseName: string;
     hue: number;
     mode?: "bright" | "consistent";
-    monoCromatic?: boolean;
 }): SingleVariable[] {
+    const whitePalette = hue == -1;
     const calculator = mode === "bright" ? highestChroma : consistentChroma;
     return shades.map((shade, shadeIndex) => [
         makeVariable({ name: baseName, shade }),
-        calculator(shadeIndex, hue, monoCromatic),
+        calculator(shadeIndex, +hue, whitePalette),
     ]);
 }
 
@@ -70,18 +69,13 @@ export const highestChroma = (shadeIndex: number, hue: number) => {
 export const consistentChroma = (
     i: number,
     hue: number,
-    monoCromatic: boolean = false
+    whitePalette: boolean = false
 ) => {
     const oklch = converter("oklch");
 
     // Using a pinned chroma
-    const chroma = monoCromatic ? chromaData[i] * 0.00001 : chromaData[i];
-    const light = monoCromatic ? lightness[i] * 1.0 : lightness[i] * 0.95;
-
-    // if (monoCromatic && i > 4) {
-    //     light = 0.24 + i / 10;
-    //     chroma = 0;
-    // }
+    const chroma = whitePalette ? chromaData[i] * 0.00001 : chromaData[i];
+    const light = whitePalette ? lightness[i] * 1.0 : lightness[i] * 0.95;
 
     const color = `oklch(${light} ${chroma} ${hue})`;
 
@@ -117,20 +111,6 @@ const chromaData: Record<number, number> = {
     9: 0.0588,
     10: 0.0491,
 };
-
-// const chromaData: Record<number, number> = {
-//     0: 0.0,
-//     1: 0.0,
-//     2: 0.0,
-//     3: 0.0,
-//     4: 0.0,
-//     5: 0.0,
-//     6: 0.0,
-//     7: 0.0,
-//     8: 0.0,
-//     9: 0.0,
-//     10: 0.0,
-// };
 
 const serializeColor = (c: Oklch): string =>
     `${c.l.toFixed(3)} ${c.c.toFixed(3)} ${c.h?.toFixed(3)}`;
