@@ -136,7 +136,7 @@ You can add or modify hue palettes by visiting [OKLCH Color Preview](https://okl
  */
 
 const hueScheme: Record<string, string> = {
-    monoCromatic: "-1",
+    white: "-1",
     blue: "250",
     green: "150",
     orange: "35",
@@ -149,19 +149,19 @@ export { hueScheme };
 
 ## API
 
-### `useColorTheme(hue: string, darkMode: boolean)`
+### `useColorTheme(hue: number, darkMode: boolean)`
 
 A custom hook that manages the application of color themes based on the provided HUE value and dark mode setting.
 
--   **Note**: Dispatches a custom event themeChange when the theme changes.
+-   **Note**: Dispatches a custom event `themeChange` when the theme changes.
 
-### `getThemeProperties(hue: string, darkMode: boolean)`
+### `getThemeProperties(hue: number, darkMode: boolean)`
 
 Defines CSS class and style properties based on the provided HUE value and dark mode setting.
 
 -   **Parameters:**
 
-    -   `hue`: A string representing the hue value. If -1, the theme is monochromatic.
+    -   `hue`: A number representing the hue value. If -1, the theme is monochromatic.
 
     -   `darkMode`: A boolean indicating if dark mode is active.
 
