@@ -1,3 +1,4 @@
+const huePalettes = `
 /**
  * HUE THEMES
  *
@@ -20,3 +21,6 @@ const hueScheme: Record<string, string> = {
 };
 
 export { hueScheme };
+`;
+
+export default huePalettes;
