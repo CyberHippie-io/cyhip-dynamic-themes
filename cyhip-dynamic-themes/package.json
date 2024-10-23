@@ -1,6 +1,6 @@
 {
     "name": "cyhip-dynamic-themes",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "Tailwind-powered dynamic color themes for React apps.",
     "author": "@KassioRF, @CyberHippie-io",
     "license": "MIT",
@@ -20,22 +20,30 @@
         "README.md",
         "LICENSE"
     ],
+    "type": "module",
     "main": "./dist/index.js",
     "module": "./dist/index.esm.js",
     "types": "./dist/index.d.ts",
+    "bin": {
+        "cyhip-dynamic-themes": "./dist/src/cli.js"
+    },
     "scripts": {
         "build": "tsc --project tsconfig.json",
         "start": "tsx src/index.ts",
-        "prepublishOnly": "yarn build"
+        "prepublishOnly": "pnpm build"
     },
     "devDependencies": {
         "@types/culori": "^2.1.1",
+        "@types/node": "^22.7.7",
         "@types/react": "^18.3.11",
+        "commander": "^12.1.0",
         "tsx": "^4.19.1",
         "typescript": "^5.6.3"
     },
     "dependencies": {
+        "chalk": "^5.3.0",
         "culori": "^4.0.1",
+        "inquirer": "^12.0.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
     },
