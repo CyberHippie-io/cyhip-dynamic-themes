@@ -1,6 +1,6 @@
 {
     "name": "cyhip-dynamic-themes",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "Tailwind-powered dynamic color themes for React apps.",
     "author": "@KassioRF, @CyberHippie-io",
     "license": "MIT",
@@ -8,12 +8,30 @@
         "type": "git",
         "url": "https://github.com/CyberHippie-io/cyhip-dynamic-themes"
     },
+    "homepage": "https://cyhip-dynamic-themes.vercel.app/",
     "keywords": [
+        "color palette",
+        "color system",
+        "color themes",
+        "css in js",
+        "css variables",
+        "custom themes",
+        "dark mode",
+        "dynamic themes",
+        "frontend styling",
+        "light mode",
+        "nextjs",
+        "OKLCH",
+        "tailwindcss",
+        "tailwindcss plugin",
+        "tailwind themes",
+        "theme customization",
+        "theme switcher",
         "react",
-        "tailwind",
-        "theme",
-        "color",
-        "dynamic"
+        "react dynamic themes",
+        "react typescipt",
+        "typescript",
+        "vite"
     ],
     "files": [
         "dist",
@@ -29,7 +47,7 @@
     },
     "scripts": {
         "build": "tsc --project tsconfig.json",
-        "start": "tsx src/index.ts",
+        "start": "tsx ./index.ts",
         "prepublishOnly": "pnpm build"
     },
     "devDependencies": {
