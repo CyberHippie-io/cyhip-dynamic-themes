@@ -15,8 +15,8 @@ import { getThemeProperties } from "./theme-helpers";
  *
  */
 
-const useColorTheme = (hue: string, darkMode: boolean) => {
-    const setTheme = useCallback((newHue: string, newDarkMode: boolean) => {
+const useColorTheme = (hue: number, darkMode: boolean) => {
+    const setTheme = useCallback((newHue: number, newDarkMode: boolean) => {
         const { className, style } = getThemeProperties(newHue, newDarkMode);
 
         document.documentElement.className = className;

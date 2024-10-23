@@ -1,3 +1,4 @@
+const huePalettes = `
 /**
  * HUE THEMES
  *
@@ -10,13 +11,16 @@
  *
  */
 
-const hueScheme: Record<string, string> = {
-    monoCromatic: "-1",
-    blue: "250",
-    green: "150",
-    orange: "35",
-    pink: "0",
-    purple: "316",
+const hueScheme: Record<string, number> = {
+    white: -1,
+    blue: 250,
+    green: 150,
+    orange: 35,
+    pink: 0,
+    purple: 316,
 };
 
 export { hueScheme };
+
+`;
+export default huePalettes;

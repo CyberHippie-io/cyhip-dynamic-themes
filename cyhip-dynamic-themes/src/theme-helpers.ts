@@ -12,19 +12,18 @@ import { getVariables } from "../lib/tw-dynamic-themes/runtime";
  *
  */
 export const getThemeProperties = (
-    hue: string,
+    hue: number,
     darkMode: boolean
 ): { className: string; style: Record<string, string> } => {
-    const monoCromatic = hue == "-1";
+    const whitePalette = hue == -1;
 
     const accent = getVariables({
         baseName: "accent",
-        hue: +hue,
-        monoCromatic: monoCromatic,
+        hue: hue,
     });
 
-    // MonoCromatic have a different accent behavior for accent values
-    if (monoCromatic) {
+    // whitePalette have a different accent behavior for accent values
+    if (whitePalette) {
         accent.push([
             "--accent-500",
             darkMode ? "1.000 0.000 89.876" : "0.212 0.000 359.000",
