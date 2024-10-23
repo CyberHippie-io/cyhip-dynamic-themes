@@ -43,7 +43,7 @@ This command generates the following files in the `/themes/` folder:
 ├── hue-palettes.ts      # To set your available hue-based colors.
 ├── root.css             # Main CSS file for styling.
 ├── theme-colors.ts      # Includes color definitions for Tailwind.
-└── theme-switcher.tsx    # Example component for theme switching.
+└── theme-switcher.tsx   # Example component for theme switching.
 ```
 
 ### Update `tailwind.config.ts`
