@@ -122,7 +122,7 @@ export default App;
 
 Check the `/templates/theme-switcher.tsx` component to see how to initialize and alternate themes.
 
-Finally, take a look at the last example and see how we can combine the accent variable with tailwind classes like `bg-accent-<value>` and `text-accent-<value>`.
+Finally, take a look on the last example and see how we can combine the accent variable with tailwind classes like `bg-accent-<value>` and `text-accent-<value>`.
 
 ## Defining Color Palettes Based on Hue
 
