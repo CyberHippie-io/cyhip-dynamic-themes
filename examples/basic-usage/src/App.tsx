@@ -1,5 +1,5 @@
+// App.tsx
 import { ThemeSwitcher } from "./themes/theme-switcher";
-
 function App() {
     return (
         <>
