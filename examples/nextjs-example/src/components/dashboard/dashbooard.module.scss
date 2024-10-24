@@ -1,9 +1,9 @@
 .dashboard__container {
-    // @apply border rounded;
-    @apply pb-2;
+    @apply rounded-lg;
+    @apply p-5 px-6;
 
-    > div {
-        @apply p-1;
+    & div {
+        @apply py-1;
     }
 }
 

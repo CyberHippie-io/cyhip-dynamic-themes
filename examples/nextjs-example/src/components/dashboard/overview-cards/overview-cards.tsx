@@ -45,7 +45,7 @@ export function OverViewCards(props: React.HTMLAttributes<HTMLDivElement>) {
             {cards.map((card, index) => (
                 <Card
                     key={index}
-                    className="rounded shadow-md bg-accent-50 dark:bg-accent-950/90"
+                    className="rounded shadow-md bg-accent-50 dark:bg-accent-900/75"
                 >
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 p-0">
                         <CardTitle className="text-sm font-medium">
@@ -54,7 +54,7 @@ export function OverViewCards(props: React.HTMLAttributes<HTMLDivElement>) {
                         {card.icon}
                     </CardHeader>
                     <CardContent className="p-0">
-                        <div className="text-2xl font-bold text-accent-800/90 dark:text-accent-100">
+                        <div className="text-2xl font-bold text-accent-950 dark:text-accent-100">
                             {card.amount}
                         </div>
                         <p className="text-xs text-muted-foreground">

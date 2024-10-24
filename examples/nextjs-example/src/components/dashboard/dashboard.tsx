@@ -10,7 +10,7 @@ const DashBoard = () => {
     return (
         <div
             className={cn(
-                "dashboard-example  py-4 px-1 sm:p-4 rounded bg-accent-50 backdrop-blur-lg dark:bg-accent-900/50",
+                "dashboard-example shadow  p-10 sm:p-4 rounded bg-accent-50 backdrop-blur-sm dark:bg-accent-950/90",
                 styles.dashboard__container
             )}
         >
@@ -32,10 +32,10 @@ const DashBoard = () => {
                 <OverViewCards className="grid gap-4 md:grid-cols-2 lg:grid-cols-4" />
 
                 <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-2">
-                    <div className="overview border rounded  shadow-lg bg-accent-50 dark:bg-accent-950/90">
+                    <div className="overview border rounded  shadow-md bg-accent-50 dark:bg-accent-900/75">
                         <OverviewChart />
                     </div>
-                    <div className="overview-info border rounded shadow-lg bg-accent-50 dark:bg-accent-950/90">
+                    <div className="overview-info border rounded shadow-md bg-accent-50 dark:bg-accent-900/75">
                         <OverViewInfo />
                     </div>
                 </div>

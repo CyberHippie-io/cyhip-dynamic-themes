@@ -27,6 +27,7 @@ export default function Home() {
 
     return (
         <>
+            <div className="dot-bg absolute inset-0 w-full -z-50" />
             {/* nav : >= xl  */}
             <nav ref={navRef} className="hidden fixed lg:block w-4/12 z-50">
                 <Banner
@@ -59,16 +60,30 @@ export default function Home() {
                 />
             </nav>
 
-            <main className="grid grid-cols-12 ">
+            <main className="grid grid-cols-12 h-screen">
                 <div className="col-span-4 hidden lg:block"></div>
                 <div className="col-span-12 lg:col-span-8">
-                    <div className=" -z-50">
-                        <div className="dot-bg absolute inset-0 w-full " />
+                    <div className="h-full flex flex-col justify-center max-w-[96vh] mx-auto">
+                        <DashBoard />
                     </div>
-
-                    <DashBoard />
                 </div>
             </main>
+            <footer className="grid grid-cols-12">
+                <div className="col-span-4 hidden lg:block"></div>
+                <div className="col-span-12 lg:col-span-8 grid justify-center items-center h-16 mt-12 mb-6 bg-transparent">
+                    <p className="text-center text-sm text-muted-foreground rounded px-10 py-4 bg-accent-200/30 dark:bg-accent-950/50">
+                        by{" "}
+                        <a
+                            href="https://github.com/KassioRF"
+                            className="font-bold hover:underline"
+                            target="_blank"
+                        >
+                            @KassioRF
+                        </a>{" "}
+                        | Cyhip Packages
+                    </p>
+                </div>
+            </footer>
         </>
     );
 }
