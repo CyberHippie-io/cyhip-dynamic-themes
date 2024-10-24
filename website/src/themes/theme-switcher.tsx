@@ -1,4 +1,3 @@
-const themeSwitcher = `
 // "use client"; // enable this if you are using Nextjs
 /**
  * ThemeSwitcher component
@@ -15,18 +14,25 @@ import { hueScheme } from "./hue-palettes";
  * This methods are used only to build a gradient sample based on the hue value.
  * Used for a visual referrence as a "icon" of the theme on the buttons.
  */
-const buildThemeSample = (hue: string, monoCromatic: boolean = false) => {
-    const oklchA = 'oklch(' + consistentChroma(4, +hue, monoCromatic) + ')';
-    const oklchB = 'oklch(' + consistentChroma(5, +hue, monoCromatic) + ')';
-    const oklchC = 'oklch(' + consistentChroma(6, +hue, monoCromatic) + ')';
-    const gradient = 'linear-gradient(70deg, ' + oklchA + ', ' + oklchB + ', ' + oklchC + ')';
+const buildThemeSample = (hue: number, whitePalette: boolean = false) => {
+    const oklchA = "oklch(" + consistentChroma(4, +hue, whitePalette) + ")";
+    const oklchB = "oklch(" + consistentChroma(5, +hue, whitePalette) + ")";
+    const oklchC = "oklch(" + consistentChroma(6, +hue, whitePalette) + ")";
+    const gradient =
+        "linear-gradient(70deg, " +
+        oklchA +
+        ", " +
+        oklchB +
+        ", " +
+        oklchC +
+        ")";
     return gradient;
 };
 
 const availableThemes: Record<string, string> = Object.keys(hueScheme).reduce(
     (acc, key) => {
         const value = hueScheme[key];
-        acc[key] = buildThemeSample(value, value === "-1");
+        acc[key] = buildThemeSample(value, value === -1);
         return acc;
     },
     {} as Record<string, string>
@@ -96,6 +102,3 @@ const ThemeSwitcher = forwardRef<
 ThemeSwitcher.displayName = "ThemeSwitcher";
 
 export { ThemeSwitcher };
-
-`;
-export default themeSwitcher;

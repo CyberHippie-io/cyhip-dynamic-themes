@@ -30,6 +30,16 @@ const initThemesDirectory = (themesDir: string) => {
 
         console.log(
             chalk.cyan(
+                "\n\t /themes/\n" +
+                    "\t ├── hue-palettes.ts\n" +
+                    "\t ├── root.css\n" +
+                    "\t ├── theme-colors.ts\n" +
+                    "\t └── theme-switcher.tsx\n"
+            )
+        );
+
+        console.log(
+            chalk.cyan(
                 `  1. Update your tailwind.conf.ts as described in /themes/theme-colors.ts`
             )
         );

@@ -1,3 +1,5 @@
 packages:
     - "cyhip-dynamic-themes"
+    - "website"
     - "examples/*"
+    - "dev-apps/*"
