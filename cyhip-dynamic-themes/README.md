@@ -3,7 +3,7 @@
 ![cyhip-dynamic-themes minzip package size](https://img.shields.io/bundlephobia/minzip/cyhip-dynamic-themes)
 [![Version](https://img.shields.io/npm/v/cyhip-dynamic-themes.svg?colorB=green)](https://www.npmjs.com/package/cyhip-dynamic-themes)
 
-**Dynamically switch color themes in your React + TypeScript + Tailwind CSS apps.**
+Implement dynamic color themes in your React apps with Tailwind CSS in a simple and practical way. This package also includes native support for dark mode.
 
 ## Features
 
