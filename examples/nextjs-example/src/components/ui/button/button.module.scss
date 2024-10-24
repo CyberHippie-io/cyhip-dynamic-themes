@@ -31,7 +31,7 @@
 }
 
 .destructive {
-    @apply bg-danger-700 text-white hover:bg-danger-700/90;
+    @apply bg-destructive-700 text-white hover:bg-destructive-700/90;
     @apply shadow;
 }
 

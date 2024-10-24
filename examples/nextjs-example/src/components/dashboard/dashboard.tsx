@@ -1,19 +1,16 @@
 import { cn } from "~/lib/utils";
-import { Button } from "~/ui";
-import styles from "./dashbooard.module.scss";
+import { Button } from "../ui/button/button";
+import styles from "./dashboard.module.scss";
 import { NavTabs } from "./nav-tabs/nav-tabs";
 import { OverViewCards } from "./overview-cards/overview-cards";
 import { OverviewChart } from "./overview-chart/overview-chart";
 import { OverViewInfo } from "./overview-info/overview-info";
-
-const DashBoard = () => {
+const DashBoard = ({
+    className,
+    ...props
+}: React.HTMLAttributes<HTMLDivElement>) => {
     return (
-        <div
-            className={cn(
-                "dashboard-example shadow  p-10 sm:p-4 rounded bg-accent-50 backdrop-blur-sm dark:bg-accent-950/90",
-                styles.dashboard__container
-            )}
-        >
+        <div className={cn(className, styles.dashboard__container)} {...props}>
             <h2 className="text-4xl font-bold">Dashboard</h2>
 
             <div className="flex flex-col sm:flex-row-reverse justify-center items-center sm:justify-between gap-4 ">

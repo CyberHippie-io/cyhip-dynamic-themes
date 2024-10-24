@@ -1,17 +1,17 @@
 "use client";
 
 import { useState } from "react";
+import { ColorPaletteIcon } from "~/components/ui/icons/colorPalette";
 import { cn } from "~/lib/utils";
-import { ColorPaletteIcon } from "~/ui/icons/colorPalette";
 import { ThemeMenu } from "../theme-menu/theme-menu";
 
 export const ThemeSelectorBtn = (
     props: React.HTMLAttributes<HTMLDivElement>
 ) => {
     const [isOpen, setIsOpen] = useState(true);
-    // px-6 py-4 rounded  flex flex-col gap-y-3 shadow-lg backdrop-blur-sm bg-white/70 dark:bg-accent-800/40
+
     return (
-        <div className={cn("drop-shadow-lg", props.className)}>
+        <div className={cn("drop-shadow-lg  flex flex-row", props.className)}>
             <div
                 className={cn(
                     "menu-wrapper transform transition-all duration-300 ease-in-out opacity-0 scale-0 origin-top-right",

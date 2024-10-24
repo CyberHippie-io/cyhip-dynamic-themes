@@ -1,9 +1,42 @@
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+} from "~/components/ui/card/card";
+import { CreditCardIcon } from "~/components/ui/icons/credit-card";
+import { DollarIcon } from "~/components/ui/icons/dollar";
+import { PulseIcon } from "~/components/ui/icons/pulse";
+import { ShareIcon } from "~/components/ui/icons/share";
 import { cn } from "~/lib/utils";
-import { Card, CardContent, CardHeader, CardTitle } from "~/ui";
-import { CreditCardIcon } from "~/ui/icons/credit-card";
-import { DollarIcon } from "~/ui/icons/dollar";
-import { PulseIcon } from "~/ui/icons/pulse";
-import { ShareIcon } from "~/ui/icons/share";
+
+export function OverViewCards(props: React.HTMLAttributes<HTMLDivElement>) {
+    return (
+        <div className={cn("", props.className)} {...props}>
+            {cards.map((card, index) => (
+                <Card
+                    key={index}
+                    className="rounded shadow-md bg-accent-50 dark:bg-accent-900/75"
+                >
+                    <CardHeader className="flex flex-row items-center justify-between space-y-0 p-0">
+                        <CardTitle className="text-sm font-medium">
+                            {card.title}
+                        </CardTitle>
+                        {card.icon}
+                    </CardHeader>
+                    <CardContent className="p-0">
+                        <div className="text-2xl font-bold text-accent-950 dark:text-accent-100">
+                            {card.amount}
+                        </div>
+                        <p className="text-xs text-muted-foreground">
+                            {card.footeNote}
+                        </p>
+                    </CardContent>
+                </Card>
+            ))}
+        </div>
+    );
+}
 
 interface CardDummy {
     title: string;
@@ -38,31 +71,3 @@ const cards: CardDummy[] = [
         icon: <PulseIcon />,
     },
 ];
-
-export function OverViewCards(props: React.HTMLAttributes<HTMLDivElement>) {
-    return (
-        <div className={cn("", props.className)} {...props}>
-            {cards.map((card, index) => (
-                <Card
-                    key={index}
-                    className="rounded shadow-md bg-accent-50 dark:bg-accent-900/75"
-                >
-                    <CardHeader className="flex flex-row items-center justify-between space-y-0 p-0">
-                        <CardTitle className="text-sm font-medium">
-                            {card.title}
-                        </CardTitle>
-                        {card.icon}
-                    </CardHeader>
-                    <CardContent className="p-0">
-                        <div className="text-2xl font-bold text-accent-950 dark:text-accent-100">
-                            {card.amount}
-                        </div>
-                        <p className="text-xs text-muted-foreground">
-                            {card.footeNote}
-                        </p>
-                    </CardContent>
-                </Card>
-            ))}
-        </div>
-    );
-}

@@ -2,11 +2,11 @@
 
 import { consistentChroma, useColorTheme } from "cyhip-dynamic-themes";
 import { HTMLAttributes, forwardRef, useEffect, useState } from "react";
+import { CheckDot } from "~/components/ui/check-dot/check-dot";
+import { MoonIcon } from "~/components/ui/icons/moon";
+import { SolarIcon } from "~/components/ui/icons/solar";
 import { capitalize, cn } from "~/lib/utils";
 import { hueScheme } from "~/themes/hue-palettes";
-import { CheckDot } from "~/ui";
-import { MoonIcon } from "~/ui/icons/moon";
-import { SolarIcon } from "~/ui/icons/solar";
 import styles from "./theme-menu.module.scss";
 
 const buildThemeSample = (hue: number, monoCromatic: boolean = false) => {
@@ -45,7 +45,7 @@ const ThemeMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
 
         return (
             <div ref={ref} className={cn("theme-menu", className)} {...props}>
-                <div className="palette-selectors grid grid-cols-2 grid-flow-row gap-x-4 gap-y-2 mb-2">
+                <div className="palette-selectors grid grid-cols-3 grid-flow-row gap-x-4 gap-y-2 mb-2">
                     {Object.entries(hueScheme).map(([key, value]) => (
                         <button
                             key={key}
