@@ -1,0 +1,43 @@
+.codeblock {
+    @apply bg-zinc-900/90 text-accent-100/80 text-sm;
+    @apply shadow-sm rounded-md;
+    @apply ps-2 pe-4 py-3;
+    @apply overflow-x-auto;
+    @apply mb-2;
+    @apply xl:w-fit;
+}
+
+.codeblock pre {
+    @apply ps-2 pe-8;
+}
+
+.howtouse {
+    div {
+        @apply p-4;
+        h1 {
+            @apply mb-2;
+        }
+        p {
+            @apply mb-2;
+            span {
+                @apply font-bold;
+            }
+        }
+        div {
+            @apply mb-4;
+        }
+    }
+}
+
+/* .howtouse > div {
+    @apply p-4;
+}
+ */
+
+/* .howtouse > div > p {
+    @apply mb-3;
+}
+
+.howtouse div > h {
+    @apply mb-3;
+} */
