@@ -10,11 +10,11 @@ const DashBoard = () => {
     return (
         <div
             className={cn(
-                "dashboard-example  py-4 px-1 sm:p-4 rounded border bg-accent-50 dark:bg-accent-900/20",
+                "dashboard-example  py-4 px-1 sm:p-4 rounded bg-accent-50 backdrop-blur-lg dark:bg-accent-900/50",
                 styles.dashboard__container
             )}
         >
-            {/* <h2 className="text-2xl">Dashboard</h2> */}
+            <h2 className="text-4xl font-bold">Dashboard</h2>
 
             <div className="flex flex-col sm:flex-row-reverse justify-center items-center sm:justify-between gap-4 ">
                 <Button> Export </Button>

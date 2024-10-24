@@ -79,3 +79,22 @@ body {
     color: var(--foreground);
     overflow-x: hidden;
 }
+
+.dot-bg {
+    position: absolute;
+    background-image: radial-gradient(
+        oklch(var(--accent-400) / 0.6) 0.05rem,
+        transparent 1px
+    );
+    background-size: 1.25rem 1.25rem;
+    z-index: -900;
+}
+
+.dark {
+    .dot-bg {
+        background-image: radial-gradient(
+            oklch(var(--accent-400) / 0.6) 0.05rem,
+            transparent 1px
+        );
+    }
+}

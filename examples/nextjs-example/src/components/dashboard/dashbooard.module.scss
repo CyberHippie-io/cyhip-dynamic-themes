@@ -3,12 +3,12 @@
     @apply pb-2;
 
     > div {
-        @apply px-4 py-4;
+        @apply p-1;
     }
 }
 
 .dashboard__content {
     > div > div {
-        @apply py-6 px-10;
+        @apply p-4;
     }
 }
