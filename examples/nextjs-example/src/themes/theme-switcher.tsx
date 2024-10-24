@@ -1,4 +1,4 @@
-"use client"; // enable this if you are using Nextjs
+// "use client"; // enable this if you are using Nextjs
 /**
  * ThemeSwitcher component
  *
@@ -15,17 +15,10 @@ import { hueScheme } from "./hue-palettes";
  * Used for a visual referrence as a "icon" of the theme on the buttons.
  */
 const buildThemeSample = (hue: number, whitePalette: boolean = false) => {
-    const oklchA = "oklch(" + consistentChroma(4, +hue, whitePalette) + ")";
-    const oklchB = "oklch(" + consistentChroma(5, +hue, whitePalette) + ")";
-    const oklchC = "oklch(" + consistentChroma(6, +hue, whitePalette) + ")";
-    const gradient =
-        "linear-gradient(70deg, " +
-        oklchA +
-        ", " +
-        oklchB +
-        ", " +
-        oklchC +
-        ")";
+    const oklchA = 'oklch(' + consistentChroma(4, +hue, whitePalette) + ')';
+    const oklchB = 'oklch(' + consistentChroma(5, +hue, whitePalette) + ')';
+    const oklchC = 'oklch(' + consistentChroma(6, +hue, whitePalette) + ')';
+    const gradient = 'linear-gradient(70deg, ' + oklchA + ', ' + oklchB + ', ' + oklchC + ')';
     return gradient;
 };
 

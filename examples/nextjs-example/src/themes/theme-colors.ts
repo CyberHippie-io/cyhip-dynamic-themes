@@ -1,8 +1,8 @@
 /**
  * COLORS
- * 
+ *
  * You can use this on tailwindcss.config.ts as follows:
- * 
+ *
  *   import type { Config } from "tailwindcss";
  *   import { themeColors } from "./src/themes/theme-colors";
  *
@@ -17,18 +17,18 @@
  *       plugins: [],
  *   } satisfies Config;
  *
- * 
+ *
  */
 
-import colors from "tailwindcss/colors";
 import { dynamicTwClasses } from "cyhip-dynamic-themes";
+import colors from "tailwindcss/colors";
 
 export const themeColors = {
     // accent vars to allow dynamic color changes
     accent: dynamicTwClasses("accent", 250),
     // static colors as you wish...
     white: colors.white,
-    destructive: colors.red,
+    danger: colors.red,
     success: colors.green,
     /**
      * You can customize this css vars based on accent values.

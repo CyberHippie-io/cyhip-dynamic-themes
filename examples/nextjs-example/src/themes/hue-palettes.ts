@@ -11,7 +11,7 @@
  */
 
 const hueScheme: Record<string, number> = {
-    white: -1,
+    default: -1,
     blue: 250,
     green: 150,
     orange: 35,
