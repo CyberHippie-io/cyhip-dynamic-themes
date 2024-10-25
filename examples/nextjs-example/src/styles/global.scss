@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,6 +6,7 @@
 @layer base {
     :root {
         /* oklch vars - Applied by dynamic accent colors */
+        --font-family: "Outfit", sans-serif;
         --background: oklch(var(--accent-200));
         --foreground: oklch(var(--accent-900));
         --primary: oklch(var(--accent-500));
@@ -41,6 +43,21 @@
         --muted: hsl(240 4.8% 30%);
         --muted-foreground: hsl(240 3.8% 70%);
     }
+}
+
+::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+    border-radius: 2px;
 }
 
 .overlay-dot {

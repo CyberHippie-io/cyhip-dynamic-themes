@@ -11,6 +11,7 @@ const config: Config = {
     ],
     darkMode: "class",
     theme: {
+        fontFamily: { sans: ["var(--font-family)", "Inter", "sans-serif"] },
         extend: {
             colors: themeColors,
 

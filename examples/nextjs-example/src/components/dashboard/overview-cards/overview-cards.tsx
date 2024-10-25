@@ -16,7 +16,7 @@ export function OverViewCards(props: React.HTMLAttributes<HTMLDivElement>) {
             {cards.map((card, index) => (
                 <Card
                     key={index}
-                    className="rounded shadow-md bg-accent-50 dark:bg-accent-900/75"
+                    className="rounded shadow-md bg-accent-50 dark:bg-accent-950/50"
                 >
                     <CardHeader className="flex flex-row items-center justify-between space-y-0 p-0">
                         <CardTitle className="text-sm font-medium">
