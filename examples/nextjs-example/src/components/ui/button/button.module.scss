@@ -1,0 +1,52 @@
+.base {
+    @apply inline-flex items-center justify-center whitespace-nowrap;
+    @apply rounded-sm text-sm font-medium transition-colors;
+    @apply focus-visible:outline-none focus-visible:ring-1;
+    @apply disabled:pointer-events-none disabled:opacity-50;
+}
+
+.default {
+    @apply bg-accent-500 text-accent-50 hover:bg-accent-500/90;
+    @apply shadow;
+}
+
+.secondary {
+    @apply dark:bg-accent-400/25;
+    @apply bg-accent-300/20   hover:bg-accent-500/20;
+    @apply shadow;
+}
+
+.outline {
+    @apply border border-accent-500 hover:bg-accent-200/30;
+    @apply shadow;
+}
+
+.ghost {
+    @apply bg-transparent hover:bg-accent-300/20;
+    @apply shadow;
+}
+
+.link {
+    @apply underline-offset-4 hover:underline;
+}
+
+.destructive {
+    @apply bg-destructive-700 text-white hover:bg-destructive-700/90;
+    @apply shadow;
+}
+
+.size_default {
+    @apply h-9 px-4 py-2;
+}
+
+.size_sm {
+    @apply h-8 rounded-md px-3 text-xs;
+}
+
+.size_lg {
+    @apply h-10 rounded-md px-8;
+}
+
+.size_icon {
+    @apply h-9 w-9;
+}
