@@ -2,8 +2,7 @@
     "name": "cyhip-dynamic-themes",
     "private": true,
     "workspaces": [
-        "cyhip-dynamic-themes",
-        "examples/*"
+        "cyhip-dynamic-themes"
     ],
     "devDependencies": {
         "pnpm": "^9.0.0"
