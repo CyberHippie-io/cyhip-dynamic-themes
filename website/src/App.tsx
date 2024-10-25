@@ -1,9 +1,9 @@
-import SimpleParallax from "simple-parallax-js";
-import { Banner } from "./components/banner/banner";
-import { CookieSettings } from "./components/examples/cookies-settings";
-import { SignUp } from "./components/examples/signup";
-import { HowToUse } from "./components/how-to-use/how-to-use";
-import { ThemeMenu } from "./components/theme-selector/theme-selector";
+import SimpleParallax from 'simple-parallax-js';
+import { Banner } from './components/banner/banner';
+import { CookieSettings } from './components/examples/cookies-settings';
+import { SignUp } from './components/examples/signup';
+import { HowToUse } from './components/how-to-use/how-to-use';
+import { ThemeMenu } from './components/theme-selector/theme-selector';
 
 function App() {
     return (
@@ -20,7 +20,7 @@ function App() {
                 <div className="">
                     <Banner className="h-[25vh] mx-auto" />
                     <div className="flex flex-col items-center">
-                        <ThemeMenu />
+                        <ThemeMenu className="mt-12" />
 
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 md:gap-8 items-center justify-center p-4">
                             <SignUp className="bg-accent-50 dark:bg-accent-950/90 max-w-[24rem] shadow" />
@@ -35,14 +35,14 @@ function App() {
             <footer>
                 <div className="grid justify-center items-center h-16 mt-12 mb-6">
                     <p className="text-center text-sm text-muted-foreground rounded px-10 py-4 bg-accent-200/30 dark:bg-accent-950/50">
-                        by{" "}
+                        by{' '}
                         <a
                             href="https://github.com/KassioRF"
                             className="font-bold hover:underline"
                             target="_blank"
                         >
                             @KassioRF
-                        </a>{" "}
+                        </a>{' '}
                         | Cyhip Packages
                     </p>
                 </div>
