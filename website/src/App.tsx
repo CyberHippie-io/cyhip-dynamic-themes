@@ -28,7 +28,7 @@ function App() {
                         </div>
                     </div>
                     <div className="xl:grid xl:grid-cols-1">
-                        <HowToUse className="backdrop-blur-sm shadow-sm bg-accent-50/50 dark:bg-accent-950/60  mt-8 mx-auto  rounded-md px-1 py-2 sm:p-4" />
+                        <HowToUse className="backdrop-blur-3xl shadow-sm bg-accent-50/70 dark:bg-accent-950/60  mt-8 mx-auto  rounded-md px-1 py-2 sm:p-4" />
                     </div>
                 </div>
             </main>
