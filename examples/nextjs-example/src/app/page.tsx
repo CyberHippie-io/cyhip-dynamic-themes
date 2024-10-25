@@ -1,12 +1,12 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import { Banner } from "~/components/banner/banner";
-import { Info } from "~/components/banner/info";
-import { BgOverlay } from "~/components/bg-overlay/bg-overlay";
-import { DashBoard } from "~/components/dashboard/dashboard";
-import { ThemeSelectorBtn } from "~/components/theme-selector/theme-selector";
-import { cn } from "~/lib/utils";
+import { useEffect, useRef, useState } from 'react';
+import { Banner } from '~/components/banner/banner';
+import { Info } from '~/components/banner/info';
+import { BgOverlay } from '~/components/bg-overlay/bg-overlay';
+import { DashBoard } from '~/components/dashboard/dashboard';
+import { ThemeSelectorBtn } from '~/components/theme-selector/theme-selector';
+import { cn } from '~/lib/utils';
 
 export default function Home() {
     const [themeBtnPosition, setThemeBtnPosition] = useState(false);
@@ -22,9 +22,9 @@ export default function Home() {
     };
 
     useEffect(() => {
-        window.addEventListener("scroll", handleScroll);
+        window.addEventListener('scroll', handleScroll);
         return () => {
-            window.removeEventListener("scroll", handleScroll);
+            window.removeEventListener('scroll', handleScroll);
         };
     }, []);
     return (
@@ -34,11 +34,11 @@ export default function Home() {
                 <nav
                     ref={navRef}
                     className={cn(
-                        "relative xl:fixed w-auto xl:w-[30vw]",
-                        "flex flex-col justify-center items-center h-full px-4",
-                        "min-h-[35vh] xl:min-h-full",
-                        "bg-accent-500/90 dark:bg-accent-800/90 text-accent-50 dark:text-accent-100",
-                        "shadow-lg"
+                        'relative xl:fixed w-auto xl:w-[30vw]',
+                        'flex flex-col justify-center items-center h-full px-4',
+                        'min-h-[35vh] xl:min-h-full',
+                        'bg-accent-500/90 dark:bg-accent-800/90 text-accent-50 dark:text-accent-100',
+                        'shadow-lg'
                     )}
                 >
                     <Banner className=" mt-12 xl:mt-0" />
@@ -50,12 +50,12 @@ export default function Home() {
                 <main className="mb-24">
                     <ThemeSelectorBtn
                         className={cn(
-                            "transition-all duration-200 ease-in-out",
-                            "z-50 absolute xl:fixed",
-                            "right-1 sm:right-5",
+                            'transition-all duration-200 ease-in-out',
+                            'z-50 absolute xl:fixed',
+                            'right-5',
                             themeBtnPosition
-                                ? "fixed top-5 "
-                                : "fixed top-[30rem] xl:top-5"
+                                ? 'fixed top-5 '
+                                : 'fixed top-[30rem] xl:top-5'
                         )}
                     />
                     <div className="max-w-[60em] mt-48 mx-auto ">

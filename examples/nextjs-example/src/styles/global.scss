@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -6,7 +6,7 @@
 @layer base {
     :root {
         /* oklch vars - Applied by dynamic accent colors */
-        --font-family: "Outfit", sans-serif;
+        --font-family: 'Outfit', sans-serif;
         --background: oklch(var(--accent-200));
         --foreground: oklch(var(--accent-900));
         --primary: oklch(var(--accent-500));
@@ -27,7 +27,7 @@
     *,
     :after,
     :before {
-        border-color: theme("colors.border");
+        border-color: theme('colors.border');
     }
 
     .dark {
