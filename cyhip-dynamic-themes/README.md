@@ -5,12 +5,27 @@
 
 Implement dynamic color themes in your React apps with Tailwind CSS in a simple and practical way. This package also includes native support for dark mode.
 
+## Examples
+
+- **Vite + React-ts: [cyhip-dynamic-themes](https://cyhip-dynamic-themes.vercel.app/)**
+
+- **Nextjs + React-ts: [cyhip-dynamic-themes-nextjs-example](https://cyhip-dynamic-themes-nextjs-example.vercel.app/)** 
+
 ## Features
 
 -   **Dynamic Color Theming**: Allow your users to switch the color theme of your application in a simple and practical way.
 -   **Dark Mode Support**: Easily switch between light and dark modes across your custom themes.
 
 Inspired by the excellent [article](https://evilmartians.com/chronicles/better-dynamic-themes-in-tailwind-with-oklch-color-magic) by Dan Kozlov and Travis Turner, this package uses the library provided by them which provides a series of features for handling colors and defining dynamic css variables. Take a look at:. [https://github.com/dkzlv/tw-dynamic-themes](https://github.com/dkzlv/tw-dynamic-themes)
+
+## How It Works?
+
+`cyhip-dynamic-themes` simplifies theme setup with a unique approach:
+
+- **Single Hue Input**: Define just the **Hue** value, and the package automatically generates all color variants across the spectrum.
+- **Automatic Color Variants**: Unlike traditional methods, there’s no need to set up each shade manually—simply select a hue, and the package takes care of the rest.
+
+- **Custom Hook for Dynamic Theme Switching**: Allow your users to switch themes dynamically with the `useColorTheme` hook.
 
 ## Installation
 
