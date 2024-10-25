@@ -1,0 +1,14 @@
+.dashboard__container {
+    @apply rounded-lg;
+    @apply p-5 px-6;
+
+    & div {
+        @apply py-1;
+    }
+}
+
+.dashboard__content {
+    > div > div {
+        @apply p-4;
+    }
+}

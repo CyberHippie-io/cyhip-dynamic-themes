@@ -1,0 +1,14 @@
+.link {
+    @apply text-sm font-medium transition-colors;
+    @apply border border-transparent rounded;
+    @apply px-2 py-1;
+}
+
+.active {
+    @apply bg-accent-500 text-accent-50;
+    @apply shadow-lg;
+}
+
+.link:hover {
+    @apply active;
+}
