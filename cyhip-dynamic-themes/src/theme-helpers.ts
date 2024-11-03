@@ -1,4 +1,5 @@
-import { getVariables } from "../lib/tw-dynamic-themes/runtime";
+import { getVariables } from '../lib/tw-dynamic-themes/runtime';
+import { chromaData as defaultChromaData } from './theme.config';
 
 /**
  * getThemeProperties
@@ -13,29 +14,31 @@ import { getVariables } from "../lib/tw-dynamic-themes/runtime";
  */
 export const getThemeProperties = (
     hue: number,
-    darkMode: boolean
+    darkMode: boolean,
+    chromaData: Record<number, number> = defaultChromaData,
 ): { className: string; style: Record<string, string> } => {
     const whitePalette = hue == -1;
 
     const accent = getVariables({
-        baseName: "accent",
+        baseName: 'accent',
         hue: hue,
+        chromaData: chromaData,
     });
 
     // whitePalette have a different accent behavior for accent values
     if (whitePalette) {
         accent.push([
-            "--accent-500",
-            darkMode ? "1.000 0.000 89.876" : "0.212 0.000 359.000",
+            '--accent-500',
+            darkMode ? '1.000 0.000 89.876' : '0.212 0.000 359.000',
         ]);
         accent.push([
-            "--accent-50",
-            darkMode ? "0.212 0.000 359.000" : "1.000 0.000 89.876",
+            '--accent-50',
+            darkMode ? '0.212 0.000 359.000' : '1.000 0.000 89.876',
         ]);
     }
 
     return {
-        className: darkMode ? "dark" : "",
+        className: darkMode ? 'dark' : '',
         style: Object.fromEntries(accent),
     };
 };
@@ -50,12 +53,10 @@ export const getThemeProperties = (
  * @returns The OKLCH color value for the provided CSS variable, e.g., "0.614 0.136 250.000", or `null` if not available.
  */
 export const currentAccentValue = (variableName: string): string | null => {
-    if (typeof window === "undefined") {
+    if (typeof window === 'undefined') {
         return null;
     }
-
     const rootElement = document.documentElement;
     const computedStyle = getComputedStyle(rootElement);
-
     return computedStyle.getPropertyValue(variableName).trim() || null;
 };

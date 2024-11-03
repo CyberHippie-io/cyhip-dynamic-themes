@@ -3,9 +3,9 @@ import chalk from "chalk";
 import fs from "fs";
 import inquirer from "inquirer";
 import path from "path";
-import huePalettes from "./_templates/hue-scheme.js";
 import rootCss from "./_templates/root-css.js";
 import themeColors from "./_templates/theme-colors.js";
+import themeConfig from "./_templates/theme.config.js";
 import themeSwitcher from "./_templates/theme-switcher.js";
 
 const initThemesDirectory = (themesDir: string) => {
@@ -13,8 +13,8 @@ const initThemesDirectory = (themesDir: string) => {
         fs.mkdirSync(themesDir);
 
         fs.writeFileSync(
-            path.join(themesDir, "hue-palettes.ts"),
-            huePalettes.trim()
+            path.join(themesDir, "theme.config.ts"),
+            themeConfig.trim()
         );
         fs.writeFileSync(path.join(themesDir, "root.css"), rootCss.trim());
         fs.writeFileSync(
@@ -31,7 +31,7 @@ const initThemesDirectory = (themesDir: string) => {
         console.log(
             chalk.cyan(
                 "\n\t /themes/\n" +
-                    "\t ├── hue-palettes.ts\n" +
+                    "\t ├── theme.config.ts\n" +
                     "\t ├── root.css\n" +
                     "\t ├── theme-colors.ts\n" +
                     "\t └── theme-switcher.tsx\n"

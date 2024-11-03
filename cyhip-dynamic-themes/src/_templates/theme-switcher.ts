@@ -7,26 +7,23 @@ const themeSwitcher = `
  *
  */
 
-import { consistentChroma, useColorTheme } from "cyhip-dynamic-themes";
-import { forwardRef, HTMLAttributes, useEffect, useState } from "react";
-import { hueScheme } from "./hue-palettes";
+import { getChroma, ThemeConfig, useTheme } from 'cyhip-dynamic-themes';
+import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
+import { chromaData, hueScheme } from './theme.config';
 
 /**
  * This methods are used only to build a gradient sample based on the hue value.
  * Used for a visual referrence as a "icon" of the theme on the buttons.
  */
-const buildThemeSample = (hue: number, whitePalette: boolean = false) => {
-    const oklchA = 'oklch(' + consistentChroma(4, +hue, whitePalette) + ')';
-    const oklchB = 'oklch(' + consistentChroma(5, +hue, whitePalette) + ')';
-    const oklchC = 'oklch(' + consistentChroma(6, +hue, whitePalette) + ')';
-    const gradient = 'linear-gradient(70deg, ' + oklchA + ', ' + oklchB + ', ' + oklchC + ')';
-    return gradient;
+const buildThemeSample = (hue: number) => {
+    const oklch = 'oklch(' + getChroma(5, hue, chromaData) + ')';
+    return oklch;
 };
 
 const availableThemes: Record<string, string> = Object.keys(hueScheme).reduce(
     (acc, key) => {
         const value = hueScheme[key];
-        acc[key] = buildThemeSample(value, value === -1);
+        acc[key] = buildThemeSample(value);
         return acc;
     },
     {} as Record<string, string>
@@ -37,20 +34,17 @@ const ThemeSwitcher = forwardRef<
     HTMLAttributes<HTMLDivElement>
 >(({ ...props }, ref) => {
     /** To initialize here you can manage cookie values to reminder user preferences. */
-    const [isMounted, setIsMounted] = useState(false);
-
-    const [darkMode, setDarkMode] = useState(false);
-    const [hue, setHue] = useState(hueScheme.blue);
-    const { setTheme } = useColorTheme(hue, darkMode);
+    const { theme, setTheme } = useTheme();
+    const [hue, setHue] = useState(theme.hue);
+    const [darkMode, setDarkMode] = useState(theme.mode === 'light');
 
     useEffect(() => {
-        if (!isMounted) return;
-        setTheme(hue, darkMode);
-    }, [hue, darkMode, setTheme, isMounted]);
-
-    useEffect(() => {
-        setIsMounted(true);
-    }, []);
+        setTheme({
+            hue,
+            mode: darkMode ? 'dark' : 'light',
+            chromaData: chromaData,
+        } as ThemeConfig);
+    }, [hue, darkMode, setTheme]);
 
     return (
         <>
@@ -93,9 +87,10 @@ const ThemeSwitcher = forwardRef<
     );
 });
 
-ThemeSwitcher.displayName = "ThemeSwitcher";
+ThemeSwitcher.displayName = 'ThemeSwitcher';
 
 export { ThemeSwitcher };
+
 
 `;
 export default themeSwitcher;
