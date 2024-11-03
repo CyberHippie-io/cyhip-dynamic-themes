@@ -55,7 +55,7 @@ This command generates the following files in the `/themes/` folder:
 
 ```bash
 /themes/
-├── theme.config.ts.ts   # To set your available hue-based colors.
+├── theme.config.ts      # To set your available hue-based colors.
 ├── root.css             # Main CSS file for styling.
 ├── theme-colors.ts      # Includes color definitions for Tailwind.
 └── theme-switcher.tsx   # Example component for theme switching.

@@ -1,5 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap");
-/* @import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Outfit:wght@100..900&display=swap"); */
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&family=Open+Sans:ital,wght@0,300..800;1,300..800&family=Outfit:wght@100..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,21 +14,21 @@
 @layer base {
     :root {
         /* --font-family: "League Spartan", sans-serif; */
-        --font-family: "Ubuntu", sans-serif;
+        --font-family: 'Ubuntu', sans-serif;
         /* oklch vars - Applied by dynamic accent colors */
-        --background: oklch(var(--accent-100));
-        --foreground: oklch(var(--accent-900));
-        --primary: oklch(var(--accent-500));
-        --primary-foreground: oklch(var(--accent-50));
-        --secondary: oklch(var(--accent-800));
-        --secondary-foreground: oklch(var(--accent-200));
-        --ring: oklch(var(--accent-500));
+        --background: var(--accent-50);
+        --foreground: var(--accent-900);
+        --primary: var(--accent-500);
+        --primary-foreground: var(--accent-50);
+        --secondary: var(--accent-200);
+        --secondary-foreground: var(--accent-900);
+        --ring: oklch(var(--accent-500) / 0.2);
         --box-shadow: oklch(var(--accent-800) / 0.15);
-        --border: oklch(var(--accent-900) / 0.2);
+        --border: oklch(var(--accent-950) / 0.2);
         /* hsl vars */
-        --muted: hsl(240 4.8% 95.9%);
-        --muted-foreground: hsl(240 3.8% 45%);
-        --input: hsl(240 5.9% 80%);
+        --muted: hsl(240 4.8% 95.9% / 0.6);
+        --muted-foreground: hsl(240 3.8% 65%);
+        --input: hsl(240 5.9% 90% / 0.5);
     }
     * {
         margin: 0;
@@ -40,42 +39,29 @@
     *,
     :after,
     :before {
-        border-color: theme("colors.border");
+        border-color: theme('colors.border');
     }
 }
 
 .dark {
     /* oklch vars - Applied by dynamic accent colors */
-    --background: oklch(var(--accent-900));
-    --foreground: oklch(var(--accent-100));
-    --primary: oklch(var(--accent-500));
-    --primary-foreground: oklch(var(--accent-50));
-    --box-shadow: oklch(var(--accent-100) / 0.15);
-    --border: oklch(var(--accent-100) / 0.4);
+    --background: var(--accent-950);
+    --foreground: var(--accent-100);
+    --primary: var(--accent-500);
+    --primary-foreground: var(--accent-50);
+    --secondary: var(--accent-800);
+    --secondary-foreground: var(--accent-200);
+    --box-shadow: oklch(var(--accent-100) / 0.1);
+    --border: oklch(var(--accent-100) / 0.25);
 
     /* hsl vars */
-    --muted: hsl(240 4.8% 30%);
+    --muted: hsl(240 4.8% 25% / 0.7);
     --muted-foreground: hsl(240 3.8% 70%);
-}
-
-/* width */
-::-webkit-scrollbar {
-    width: 0.5rem;
-    height: 0.5rem;
-}
-
-::-webkit-scrollbar-thumb {
-    background-color: gray;
-    border-radius: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0);
-    border-radius: 2px;
+    --input: hsl(240 5.9% 80% / 0.8);
 }
 
 body {
-    background-color: var(--background);
-    color: var(--foreground);
+    @apply bg-background dark:bg-background;
+    @apply text-foreground;
     overflow-x: hidden;
 }
