@@ -55,7 +55,7 @@ This command generates the following files in the `/themes/` folder:
 
 ```bash
 /themes/
-├── hue-palettes.ts      # To set your available hue-based colors.
+├── theme.config.ts.ts   # To set your available hue-based colors.
 ├── root.css             # Main CSS file for styling.
 ├── theme-colors.ts      # Includes color definitions for Tailwind.
 └── theme-switcher.tsx   # Example component for theme switching.
@@ -84,6 +84,8 @@ export default {
 
 **Note:** After updating the configuration, restart your application to apply the changes.
 
+
+
 ### Import `root.css`
 
 To apply CSS styles linked to the defined themes, add `/themes/root.css` to your root TSX file:
@@ -102,6 +104,36 @@ createRoot(document.getElementById("root")!).render(
         <App />
     </StrictMode>
 );
+```
+
+
+### Theme Provider
+
+Use the `ThemeProvider` to initialize a default theme.
+
+```tsx
+// src/main.tsx
+import { ThemeConfig, ThemeProvider } from 'cyhip-dynamic-themes';
+import { chromaData, hueScheme } from './themes/theme.config.ts';
+
+import './index.css';
+
+createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+        <ThemeProvider
+            themeConfig={
+                {
+                    hue: hueScheme.default,
+                    mode: 'light',
+                    chromaData: chromaData,
+                } as ThemeConfig
+            }
+        >
+            <App />
+        </ThemeProvider>
+    </StrictMode>
+);
+
 ```
 
 ### Switching Themes Dynamically
@@ -164,22 +196,36 @@ export { hueScheme };
 
 ## API
 
-### `useColorTheme(hue: number, darkMode: boolean)`
+### `Type ThemeConfig`
+The `ThemeConfig` type represents the configuration settings for an application's theme, specifically controlling color and mode settings. This type provides key properties for determining color hues, dark or light mode, and chromatic adjustments based on a data record.
+
+- **Properties:**
+
+    - `hue`: `number`
+    It determines the primary color base; if set to -1, the theme uses a white color based scheme.
+
+    - `mode`: `'light' | 'dark'`
+    Defines whether the theme is in "light" or "dark" mode. Acceptable
+
+    - `chromaData`: `Record<number,number>`
+    A record that maps specific numeric values to chroma levels. This data allows for dynamic chromatic adjustments, enabling fine-tuning of the theme's color saturation or intensity.
+
+### `useColorTheme(theme: ThemeConfig)`
 
 A custom hook that manages the application of color themes based on the provided HUE value and dark mode setting.
 
--   **Note**: Dispatches a custom event `themeChange` when the theme changes.
 
-### `getThemeProperties(hue: number, darkMode: boolean)`
+### `getThemeProperties(hue: number, darkMode: boolean, chromaData: Record<number,number>)`
 
 Defines CSS class and style properties based on the provided HUE value and dark mode setting.
 
 -   **Parameters:**
 
-    -   `hue`: A number representing the hue value. If -1, the theme is monochromatic.
+    -   `hue`
 
     -   `darkMode`: A boolean indicating if dark mode is active.
 
+    - `chromaData`
 -   **Returns:**
 
     -   An object containing:

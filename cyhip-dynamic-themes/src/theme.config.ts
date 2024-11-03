@@ -4,7 +4,6 @@
  */
 export type ThemeMode = 'light' | 'dark';
 
-// @TODO: Theme color should have
 // Hue value, chromaData as default.
 export type ThemeColor = number;
 
