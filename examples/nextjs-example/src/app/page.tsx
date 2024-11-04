@@ -37,7 +37,7 @@ export default function Home() {
                         'relative xl:fixed w-auto xl:w-[30vw]',
                         'flex flex-col justify-center items-center h-full px-4',
                         'min-h-[35vh] xl:min-h-full',
-                        'bg-accent-500/85 dark:bg-accent-900/95 text-accent-50 dark:text-accent-100',
+                        'bg-accent-500/75 dark:bg-accent-900/90 text-accent-50 dark:text-accent-100',
                         'shadow-lg'
                     )}
                 >
