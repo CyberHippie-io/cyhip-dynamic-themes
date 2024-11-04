@@ -43,7 +43,7 @@ export default function Home() {
                 >
                     <Banner className=" mt-12 xl:mt-0" />
                     <Info className="mt-6 xl:mt-24" />
-                    <BgOverlay className="opacity-20 dark:opacity-85 xl:opacity-10" />
+                    <BgOverlay className="opacity-20  dark:opacity-60 xl:dark:opacity-5 xl:opacity-10" />
                 </nav>
             </div>
             <div className="col-span-3 xl:col-span-2 ">
