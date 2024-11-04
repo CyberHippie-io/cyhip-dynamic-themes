@@ -1,11 +1,20 @@
 .codeblock {
-    @apply bg-zinc-900/90 text-accent-100/80 text-sm;
-    @apply shadow-sm rounded-md;
+    @apply text-accent-950/65 text-sm;
+    @apply bg-gray-200/30;
+    @apply shadow-sm rounded;
     @apply ps-2 pe-4 py-3;
     @apply overflow-x-auto;
     @apply mb-2;
     @apply xl:w-fit;
+    @apply border border-gray-200;
 }
+
+:global(.dark) .codeblock {
+    @apply text-accent-100/65;
+    @apply border-accent-800/50;
+    @apply bg-accent-900/15;
+  }
+
 
 .codeblock pre {
     @apply ps-2 pe-8;

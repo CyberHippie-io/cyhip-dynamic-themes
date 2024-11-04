@@ -27,8 +27,8 @@
         --border: oklch(var(--accent-950) / 0.2);
         /* hsl vars */
         --muted: hsl(240 4.8% 95.9% / 0.6);
-        --muted-foreground: hsl(240 3.8% 65%);
-        --input: hsl(240 5.9% 90% / 0.5);
+        --muted-foreground: hsl(240 3.8% 45%);
+        --input: hsl(240 5.9% 90% );
     }
     * {
         margin: 0;
@@ -56,7 +56,7 @@
 
     /* hsl vars */
     --muted: hsl(240 4.8% 25% / 0.7);
-    --muted-foreground: hsl(240 3.8% 70%);
+    --muted-foreground: hsl(240 3.8% 65%);
     --input: hsl(240 5.9% 80% / 0.8);
 }
 
@@ -64,4 +64,20 @@ body {
     @apply bg-background dark:bg-background;
     @apply text-foreground;
     overflow-x: hidden;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: gray;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0);
+    border-radius: 2px;
 }
