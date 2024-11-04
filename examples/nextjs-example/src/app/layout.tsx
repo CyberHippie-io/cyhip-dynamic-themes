@@ -15,6 +15,14 @@ export default function RootLayout({
     return (
         <html lang="en">
             <body>{children}</body>
+            {/* <ThemeProvider
+                themeConfig={{
+                    hue: hueScheme.blue,
+                    mode: 'light',
+                    chromaData: chromaData,
+                }}
+            >
+            </ThemeProvider> */}
         </html>
     );
 }

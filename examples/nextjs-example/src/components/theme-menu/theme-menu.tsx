@@ -1,18 +1,18 @@
 'use client';
 
-import { consistentChroma, useColorTheme } from 'cyhip-dynamic-themes';
-import { HTMLAttributes, forwardRef, useEffect, useState } from 'react';
+import { getChroma, ThemeConfig, useTheme } from 'cyhip-dynamic-themes';
+import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
 import { CheckDot } from '~/components/ui/check-dot/check-dot';
 import { MoonIcon } from '~/components/ui/icons/moon';
 import { SolarIcon } from '~/components/ui/icons/solar';
 import { capitalize, cn } from '~/lib/utils';
-import { hueScheme } from '~/themes/hue-palettes';
+import { chromaData, hueScheme } from '~/themes/theme.config';
 import styles from './theme-menu.module.scss';
 
-const buildThemeSample = (hue: number, monoCromatic: boolean = false) => {
-    const oklchA = `oklch(${consistentChroma(4, +hue, monoCromatic)})`;
-    const oklchB = `oklch(${consistentChroma(5, +hue, monoCromatic)})`;
-    const oklchC = `oklch(${consistentChroma(6, +hue, monoCromatic)})`;
+const buildThemeSample = (hue: number) => {
+    const oklchA = `oklch(${getChroma(4, +hue, chromaData)})`;
+    const oklchB = `oklch(${getChroma(5, +hue, chromaData)})`;
+    const oklchC = `oklch(${getChroma(6, +hue, chromaData)})`;
     const gradient = `linear-gradient(70deg, ${oklchA}, ${oklchB}, ${oklchC})`;
     return gradient;
 };
@@ -20,7 +20,7 @@ const buildThemeSample = (hue: number, monoCromatic: boolean = false) => {
 const availableThemes: Record<string, string> = Object.keys(hueScheme).reduce(
     (acc, key) => {
         const value = hueScheme[key];
-        acc[key] = buildThemeSample(value, value === -1);
+        acc[key] = buildThemeSample(value);
         return acc;
     },
     {} as Record<string, string>
@@ -28,20 +28,17 @@ const availableThemes: Record<string, string> = Object.keys(hueScheme).reduce(
 
 const ThemeMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     ({ className, ...props }, ref) => {
-        const [isMounted, setIsMounted] = useState(false);
-
+        const { setTheme } = useTheme();
         const [darkMode, setDarkMode] = useState(false);
         const [hue, setHue] = useState(hueScheme.blue);
-        const { setTheme } = useColorTheme(hue, darkMode);
 
         useEffect(() => {
-            if (!isMounted) return;
-            setTheme(hue, darkMode);
-        }, [hue, darkMode, setTheme, isMounted]);
-
-        useEffect(() => {
-            setIsMounted(true);
-        }, []);
+            setTheme({
+                hue: hue,
+                mode: darkMode ? 'dark' : 'light',
+                chromaData: chromaData,
+            } as ThemeConfig);
+        }, [hue, darkMode, setTheme]);
 
         return (
             <div ref={ref} className={cn('theme-menu', className)} {...props}>

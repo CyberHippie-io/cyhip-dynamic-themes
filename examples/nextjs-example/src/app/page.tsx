@@ -28,7 +28,7 @@ export default function Home() {
         };
     }, []);
     return (
-        <div className="relative grid grid-cols-3 gap-x-8 bg-accent-200/5 dark:bg-accent-900/20">
+        <div className="relative grid grid-cols-3 gap-x-8 bg-accent-200/5 dark:bg-accent-950/5">
             <BgOverlay className="opacity-20" />
             <div className="col-span-3 xl:col-span-1">
                 <nav
@@ -37,7 +37,7 @@ export default function Home() {
                         'relative xl:fixed w-auto xl:w-[30vw]',
                         'flex flex-col justify-center items-center h-full px-4',
                         'min-h-[35vh] xl:min-h-full',
-                        'bg-accent-500/90 dark:bg-accent-800/90 text-accent-50 dark:text-accent-100',
+                        'bg-accent-500/85 dark:bg-accent-900/95 text-accent-50 dark:text-accent-100',
                         'shadow-lg'
                     )}
                 >

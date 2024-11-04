@@ -1,10 +1,10 @@
-import { cn } from "~/lib/utils";
-import { Button } from "../ui/button/button";
-import styles from "./dashboard.module.scss";
-import { NavTabs } from "./nav-tabs/nav-tabs";
-import { OverViewCards } from "./overview-cards/overview-cards";
-import { OverviewChart } from "./overview-chart/overview-chart";
-import { OverViewInfo } from "./overview-info/overview-info";
+import { cn } from '~/lib/utils';
+import { Button } from '../ui/button/button';
+import styles from './dashboard.module.scss';
+import { NavTabs } from './nav-tabs/nav-tabs';
+import { OverViewCards } from './overview-cards/overview-cards';
+import { OverviewChart } from './overview-chart/overview-chart';
+import { OverViewInfo } from './overview-info/overview-info';
 const DashBoard = ({
     className,
     ...props
@@ -22,17 +22,17 @@ const DashBoard = ({
 
             <div
                 className={cn(
-                    "dashboard-content flex flex-col gap-y-4",
+                    'dashboard-content flex flex-col gap-y-4',
                     styles.dashboard__content
                 )}
             >
                 <OverViewCards className="grid gap-4 md:grid-cols-2 lg:grid-cols-4" />
 
                 <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 xl:grid-cols-2">
-                    <div className="overview border rounded  shadow-md bg-accent-50 dark:bg-accent-950/50">
+                    <div className="overview border rounded  shadow-md bg-accent-100/50 dark:bg-accent-900/20">
                         <OverviewChart />
                     </div>
-                    <div className="overview-info border rounded shadow-md bg-accent-50 dark:bg-accent-950/50">
+                    <div className="overview-info border rounded shadow-md bg-accent-100/50 dark:bg-accent-900/20">
                         <OverViewInfo />
                     </div>
                 </div>
