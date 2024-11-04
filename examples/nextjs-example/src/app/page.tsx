@@ -37,13 +37,13 @@ export default function Home() {
                         'relative xl:fixed w-auto xl:w-[30vw]',
                         'flex flex-col justify-center items-center h-full px-4',
                         'min-h-[35vh] xl:min-h-full',
-                        'bg-accent-500/75 dark:bg-accent-900/90 text-accent-50 dark:text-accent-100',
+                        'bg-accent-500/80  dark:bg-accent-900/90 text-accent-50 dark:text-accent-100',
                         'shadow-lg'
                     )}
                 >
                     <Banner className=" mt-12 xl:mt-0" />
                     <Info className="mt-6 xl:mt-24" />
-                    <BgOverlay className="opacity-100 xl:opacity-10" />
+                    <BgOverlay className="opacity-20 dark:opacity-85 xl:opacity-10" />
                 </nav>
             </div>
             <div className="col-span-3 xl:col-span-2 ">
