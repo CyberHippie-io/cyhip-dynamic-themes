@@ -1,6 +1,6 @@
 {
     "name": "cyhip-dynamic-themes",
-    "version": "0.1.5",
+    "version": "0.2.2",
     "description": "Tailwind-powered dynamic color themes for React apps.",
     "author": "@KassioRF, @CyberHippie-io",
     "license": "MIT",
@@ -64,7 +64,8 @@
         "culori": "^4.0.1",
         "inquirer": "^12.0.0",
         "react": "^18",
-        "react-dom": "^18"
+        "react-dom": "^18",
+        "zustand": "^5.0.1"
     },
     "peerDependencies": {
         "react": "^18",

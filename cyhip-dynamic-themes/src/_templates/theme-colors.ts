@@ -2,14 +2,14 @@ const themeColors = `
 
 /**
  * COLORS
- * 
+ *
  * You can use this on tailwindcss.config.ts as follows:
- * 
+ *
  *   import type { Config } from "tailwindcss";
  *   import { themeColors } from "./src/themes/theme-colors";
  *
  *   export default {
- *       content: ["./index.html", ".\\src\\**\\*.{js,ts,jsx,tsx}"],
+ *       content: ["./index.html", ".\src\**\*.{js,ts,jsx,tsx}"],
  *       darkMode: "class",
  *       theme: {
  *           extend: {
@@ -19,15 +19,16 @@ const themeColors = `
  *       plugins: [],
  *   } satisfies Config;
  *
- * 
+ *
  */
 
-import colors from "tailwindcss/colors";
-import { dynamicTwClasses } from "cyhip-dynamic-themes";
+import { dynamicTwClasses } from 'cyhip-dynamic-themes';
+import colors from 'tailwindcss/colors';
+import { hueScheme } from './theme.config';
 
 export const themeColors = {
     // accent vars to allow dynamic color changes
-    accent: dynamicTwClasses("accent", 250),
+    accent: dynamicTwClasses('accent', hueScheme.default),
     // static colors as you wish...
     white: colors.white,
     destructive: colors.red,
@@ -36,23 +37,26 @@ export const themeColors = {
      * You can customize this css vars based on accent values.
      * Take a look at root.css
      */
-    background: "var(--background)",
-    foreground: "var(--foreground)",
+    background: 'oklch(var(--background) / <alpha-value>)',
+
+    foreground: 'oklch(var(--foreground) / <alpha-value>)',
     primary: {
-        DEFAULT: "var(--primary)",
-        foreground: "var(--primary-foreground)",
+        DEFAULT: 'oklch(var(--primary) / <alpha-value>)',
+        foreground: 'oklch(var(--primary-foreground) / <alpha-value>)',
     },
     secondary: {
-        DEFAULT: "var(--secondary)",
-        foreground: "var(--foreground)",
+        DEFAULT: 'oklch(var(--secondary) / <alpha-value>)',
+        foreground: 'oklch(var(--secondary-foreground) / <alpha-value>)',
     },
     muted: {
-        DEFAULT: "var(--muted)",
-        foreground: "var(--muted-foreground)",
+        DEFAULT: 'var(--muted)',
+        foreground: 'var(--muted-foreground)',
     },
-    border: "var(--border)",
-    ring: "var(--ring)",
-    input: "var(--input)",
-};`;
+    border: 'var(--border)',
+    ring: 'var(--ring)',
+    input: 'var(--input)',
+};
+
+`;
 
 export default themeColors;

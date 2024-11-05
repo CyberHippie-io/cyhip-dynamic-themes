@@ -45,7 +45,7 @@ const Banner = (props: React.HTMLAttributes<HTMLDivElement>) => {
             {/* npm how to install with clipboard */}
             <div className="grid grid-cols-1 gap-y-4 mx-auto">
                 <button
-                    className="flex flex-row justify-center items-center mt-2 space-x-4 border py-1 px-4 rounded-lg bg-accent-950/90 text-zinc-200 hover:shadow-md hover:bg-accent-900/90"
+                    className="flex flex-row justify-center items-center mt-2 space-x-4 border py-1 px-4 rounded-lg bg-accent-950/90 text-zinc-400 hover:shadow-md hover:bg-accent-950/80"
                     onClick={() => copyToClipboard()}
                 >
                     <span className=""> {npmInstall} </span>

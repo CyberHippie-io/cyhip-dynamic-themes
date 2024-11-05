@@ -7,9 +7,9 @@ Implement dynamic color themes in your React apps with Tailwind CSS in a simple 
 
 ## Examples
 
-- **Vite + React-ts: [cyhip-dynamic-themes](https://cyhip-dynamic-themes.vercel.app/)**
+-   **Vite + React-ts: [cyhip-dynamic-themes](https://cyhip-dynamic-themes.vercel.app/)**
 
-- **Nextjs + React-ts: [cyhip-dynamic-themes-nextjs-example](https://cyhip-dynamic-themes-nextjs-example.vercel.app/)** 
+-   **Nextjs + React-ts: [cyhip-dynamic-themes-nextjs-example](https://cyhip-dynamic-themes-nextjs-example.vercel.app/)**
 
 ## Features
 
@@ -22,10 +22,10 @@ Inspired by the excellent [article](https://evilmartians.com/chronicles/better-d
 
 `cyhip-dynamic-themes` simplifies theme setup with a unique approach:
 
-- **Single Hue Input**: Define just the **Hue** value, and the package automatically generates all color variants across the spectrum.
-- **Automatic Color Variants**: Unlike traditional methods, there’s no need to set up each shade manually—simply select a hue, and the package takes care of the rest.
+-   **Single Hue Input**: Define just the **Hue** value, and the package automatically generates all color variants across the spectrum.
+-   **Automatic Color Variants**: Unlike traditional methods, there’s no need to set up each shade manually—simply select a hue, and the package takes care of the rest.
 
-- **Custom Hook for Dynamic Theme Switching**: Allow your users to switch themes dynamically with the `useColorTheme` hook.
+-   **Custom Hook for Dynamic Theme Switching**: Allow your users to switch themes dynamically with the `useColorTheme` hook.
 
 ## Installation
 
@@ -55,7 +55,7 @@ This command generates the following files in the `/themes/` folder:
 
 ```bash
 /themes/
-├── hue-palettes.ts      # To set your available hue-based colors.
+├── theme.config.ts   # To set your available hue-based colors.
 ├── root.css             # Main CSS file for styling.
 ├── theme-colors.ts      # Includes color definitions for Tailwind.
 └── theme-switcher.tsx   # Example component for theme switching.
@@ -67,12 +67,12 @@ To enable dynamic colors and dark mode, modify your `tailwind.config.ts` as foll
 
 ```ts
 // tailwind.config.ts
-import type { Config } from "tailwindcss";
-import { themeColors } from "./src/themes/theme-colors";
+import type { Config } from 'tailwindcss';
+import { themeColors } from './src/themes/theme-colors';
 
 export default {
-    content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
-    darkMode: "class",
+    content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+    darkMode: 'class',
     theme: {
         extend: {
             colors: themeColors,
@@ -90,16 +90,44 @@ To apply CSS styles linked to the defined themes, add `/themes/root.css` to your
 
 ```tsx
 // src/main.tsx
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
+import App from './App.tsx';
 
 // Import CSS
-import "./themes/root.css";
+import './themes/root.css';
 
-createRoot(document.getElementById("root")!).render(
+createRoot(document.getElementById('root')!).render(
     <StrictMode>
         <App />
+    </StrictMode>
+);
+```
+
+### Theme Provider
+
+Use the `ThemeProvider` to initialize a default theme.
+
+```tsx
+// src/main.tsx
+import { ThemeConfig, ThemeProvider } from 'cyhip-dynamic-themes';
+import { chromaData, hueScheme } from './themes/theme.config.ts';
+
+import './index.css';
+
+createRoot(document.getElementById('root')!).render(
+    <StrictMode>
+        <ThemeProvider
+            themeConfig={
+                {
+                    hue: hueScheme.default,
+                    mode: 'light',
+                    chromaData: chromaData,
+                } as ThemeConfig
+            }
+        >
+            <App />
+        </ThemeProvider>
     </StrictMode>
 );
 ```
@@ -110,7 +138,7 @@ Switching the main color palette can be done using the `ThemeSwitcher` component
 
 ```tsx
 // App.tsx
-import { ThemeSwitcher } from "./themes/theme-switcher";
+import { ThemeSwitcher } from './themes/theme-switcher';
 function App() {
     return (
         <>
@@ -151,12 +179,12 @@ You can add or modify hue palettes by visiting [OKLCH Color Preview](https://okl
  */
 
 const hueScheme: Record<string, string> = {
-    white: "-1",
-    blue: "250",
-    green: "150",
-    orange: "35",
-    pink: "0",
-    purple: "316",
+    white: '-1',
+    blue: '250',
+    green: '150',
+    orange: '35',
+    pink: '0',
+    purple: '316',
 };
 
 export { hueScheme };
@@ -164,21 +192,36 @@ export { hueScheme };
 
 ## API
 
-### `useColorTheme(hue: number, darkMode: boolean)`
+### `Type ThemeConfig`
+
+The `ThemeConfig` type represents the configuration settings for an application's theme, specifically controlling color and mode settings. This type provides key properties for determining color hues, dark or light mode, and chromatic adjustments based on a data record.
+
+-   **Properties:**
+
+    -   `hue`: `number`
+        It determines the primary color base; if set to -1, the theme uses a white color based scheme.
+
+    -   `mode`: `'light' | 'dark'`
+        Defines whether the theme is in "light" or "dark" mode. Acceptable
+
+    -   `chromaData`: `Record<number,number>`
+        A record that maps specific numeric values to chroma levels. This data allows for dynamic chromatic adjustments, enabling fine-tuning of the theme's color saturation or intensity.
+
+### `useColorTheme(theme: ThemeConfig)`
 
 A custom hook that manages the application of color themes based on the provided HUE value and dark mode setting.
 
--   **Note**: Dispatches a custom event `themeChange` when the theme changes.
-
-### `getThemeProperties(hue: number, darkMode: boolean)`
+### `getThemeProperties(hue: number, darkMode: boolean, chromaData: Record<number,number>)`
 
 Defines CSS class and style properties based on the provided HUE value and dark mode setting.
 
 -   **Parameters:**
 
-    -   `hue`: A number representing the hue value. If -1, the theme is monochromatic.
+    -   `hue`
 
     -   `darkMode`: A boolean indicating if dark mode is active.
+
+    -   `chromaData`
 
 -   **Returns:**
 
