@@ -10,7 +10,7 @@
         "preview": "vite preview"
     },
     "dependencies": {
-        "cyhip-dynamic-themes": "^0.2.1",
+        "cyhip-dynamic-themes": "^0.2.2",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
         "simple-parallax-js": "^6.0.1"

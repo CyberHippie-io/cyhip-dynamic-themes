@@ -12,9 +12,9 @@ import { availableThemes } from './themeSamples';
 
 const ThemeMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     ({ className, ...props }, ref) => {
-        const { theme, setTheme } = useTheme();
-        const [hue, setHue] = useState(theme.hue);
-        const [darkMode, setDarkMode] = useState(theme.mode === 'light');
+        const { setTheme } = useTheme();
+        const [hue, setHue] = useState(hueScheme.blue);
+        const [darkMode, setDarkMode] = useState(false);
 
         useEffect(() => {
             setTheme({

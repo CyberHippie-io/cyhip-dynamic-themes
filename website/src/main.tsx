@@ -11,7 +11,7 @@ createRoot(document.getElementById('root')!).render(
         <ThemeProvider
             themeConfig={
                 {
-                    hue: hueScheme.default,
+                    hue: hueScheme.blue,
                     mode: 'light',
                     chromaData: chromaData,
                 } as ThemeConfig
