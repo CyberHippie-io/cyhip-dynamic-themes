@@ -29,8 +29,8 @@ const availableThemes: Record<string, string> = Object.keys(hueScheme).reduce(
 const ThemeMenu = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
     ({ className, ...props }, ref) => {
         const { setTheme } = useTheme();
-        const [darkMode, setDarkMode] = useState(false);
         const [hue, setHue] = useState(hueScheme.blue);
+        const [darkMode, setDarkMode] = useState(false);
 
         useEffect(() => {
             setTheme({

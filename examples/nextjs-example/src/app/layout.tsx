@@ -1,6 +1,8 @@
+import { ThemeConfig, ThemeProvider } from 'cyhip-dynamic-themes';
 import type { Metadata } from 'next';
 
 import '~/styles/global.scss';
+import { chromaData, hueScheme } from '~/themes/theme.config';
 
 export const metadata: Metadata = {
     title: 'cyhip-dynamic-themes | Nextjs Example ',
@@ -14,15 +16,17 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body>{children}</body>
-            {/* <ThemeProvider
-                themeConfig={{
-                    hue: hueScheme.blue,
-                    mode: 'light',
-                    chromaData: chromaData,
-                }}
+            <ThemeProvider
+                themeConfig={
+                    {
+                        hue: hueScheme.blue,
+                        mode: 'light',
+                        chromaData: chromaData,
+                    } as ThemeConfig
+                }
             >
-            </ThemeProvider> */}
+                <body>{children}</body>
+            </ThemeProvider>
         </html>
     );
 }

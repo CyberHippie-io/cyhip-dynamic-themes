@@ -11,7 +11,7 @@
     "dependencies": {
         "autoprefixer": "^10.4.20",
         "clsx": "^2.1.1",
-        "cyhip-dynamic-themes": "^0.2.1",
+        "cyhip-dynamic-themes": "^0.2.2",
         "next": "14.2.15",
         "react": "^18",
         "react-dom": "^18",
