@@ -1,12 +1,12 @@
-import { cn } from "~/lib/utils";
-import styles from "./how-to-use.module.css";
+import { cn } from '~/lib/utils';
+import styles from './how-to-use.module.css';
 const HowToUse = (props: React.HTMLAttributes<HTMLDivElement>) => {
     return (
         <div className={cn(props.className, styles.howtouse)}>
             <div>
                 <h1 className="text-3xl font-bold drop-shadow">Installation</h1>
                 <p>Install the package via npm, pnpm, or yarn.</p>
-                <div className={cn(styles.codeblock, "")}>
+                <div className={cn(styles.codeblock, '')}>
                     <pre>{install}</pre>
                 </div>
             </div>
@@ -15,7 +15,7 @@ const HowToUse = (props: React.HTMLAttributes<HTMLDivElement>) => {
                     Init theme files
                 </h1>
                 <p>Initialize your base theme files.</p>
-                <div className={cn(styles.codeblock, "")}>
+                <div className={cn(styles.codeblock, '')}>
                     <pre>{initbasefiles}</pre>
                 </div>
                 <p>
@@ -23,7 +23,7 @@ const HowToUse = (props: React.HTMLAttributes<HTMLDivElement>) => {
                     <span className="code-inline"> /themes/ </span>
                     folder:
                 </p>
-                <div className={cn(styles.codeblock, "")}>
+                <div className={cn(styles.codeblock, '')}>
                     <pre>{basefilesStructure}</pre>
                 </div>
             </div>
@@ -36,7 +36,7 @@ const HowToUse = (props: React.HTMLAttributes<HTMLDivElement>) => {
                     <span className="code-inline"> tailwind.config.ts </span> as
                     follows:
                 </p>
-                <div className={cn(styles.codeblock, "")}>
+                <div className={cn(styles.codeblock, '')}>
                     <pre>{tailwindcfg}</pre>
                 </div>
             </div>
@@ -45,22 +45,31 @@ const HowToUse = (props: React.HTMLAttributes<HTMLDivElement>) => {
                     Import root.css in your app.
                 </h1>
                 <p>
-                    Import{" "}
+                    Import{' '}
                     <span className="code-inline"> /themes/root.css </span>
                     into your root TSX file:
                 </p>
-                <div className={cn(styles.codeblock, "")}>
-                    <pre>{appbase}</pre>
+                <div className={cn(styles.codeblock, '')}>
+                    <pre>{appbasecss}</pre>
+                </div>
+            </div>
+            <div>
+                <h1 className="text-3xl font-bold drop-shadow">
+                    Use the ThemeProvider to initialize a default theme.
+                </h1>
+
+                <div className={cn(styles.codeblock, '')}>
+                    <pre>{themeProvider}</pre>
                 </div>
             </div>
             <div>
                 <h1 className="text-3xl font-bold drop-shadow">Usage</h1>
                 <p>
                     Switch your app theme colors dynamically with
-                    <span className="code-inline"> {"<ThemeSwitcher />"} </span>
+                    <span className="code-inline"> {'<ThemeSwitcher />'} </span>
                     component.
                 </p>
-                <div className={cn(styles.codeblock, "")}>
+                <div className={cn(styles.codeblock, '')}>
                     <pre>{code}</pre>
                 </div>
                 <p>
@@ -80,7 +89,7 @@ yarn add cyhip-dynamic-themes
 const initbasefiles = `npx cyhip-dynamic-themes init`;
 
 const basefilesStructure = `/themes/
-├── hue-palettes.ts      # To set your available hue-based colors.
+├── theme.config.ts      # To set your available hue-based colors.
 ├── root.css             # Main CSS file for styling.
 ├── theme-colors.ts      # Includes color definitions for Tailwind.
 └── theme-switcher.tsx   # An example of a theme switching component.
@@ -101,7 +110,7 @@ export default {
     plugins: [],
 } satisfies Config;`;
 
-const appbase = `// Your base tsx: main.tsx | index.tsx | app.tsx
+const appbasecss = `// Your base tsx: main.tsx | index.tsx | app.tsx
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
@@ -111,6 +120,31 @@ import "./themes/root.css";
 
 createRoot(document.getElementById("root")!).render(
     <StrictMode>
+        <App />
+    </StrictMode>
+);`;
+
+const themeProvider = `// Your base tsx: main.tsx | index.tsx | app.tsx
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+
+import { ThemeConfig, ThemeProvider } from 'cyhip-dynamic-themes';
+import { chromaData, hueScheme } from './themes/theme.config.ts';
+
+import './index.css';
+
+createRoot(document.getElementById("root")!).render(
+    <StrictMode>
+        <ThemeProvider
+            themeConfig={
+                {
+                    hue: hueScheme.default,
+                    mode: 'light',
+                    chromaData: chromaData,
+                } as ThemeConfig
+            }
+        >    
         <App />
     </StrictMode>
 );`;
