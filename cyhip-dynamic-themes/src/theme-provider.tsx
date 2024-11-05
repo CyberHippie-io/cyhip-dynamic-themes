@@ -1,4 +1,4 @@
-// 'use client'; // enable on Nextjs
+'use client'; // enable on Nextjs
 
 import { updateTheme, useTheme } from './theme-hook';
 import React, { useEffect, useState, type ReactNode } from 'react';
@@ -10,7 +10,6 @@ interface ThemeProviderProps {
 }
 
 const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, themeConfig }) => {
-    /**@TODO Get this values from user cookie */
     const { theme } = useTheme();
     const [isInitialized, setIsInitialized] = useState(false);
 
