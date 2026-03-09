@@ -1,5 +1,5 @@
 const themeSwitcher = `
-// "use client"; // enable this if you are using Nextjs
+'use client'; // enable this if you are using Nextjs
 /**
  * ThemeSwitcher component
  *

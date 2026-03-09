@@ -1,3 +1,4 @@
+'use client'; // enable for next
 import React, { useLayoutEffect, type ReactNode } from 'react';
 import { useTheme } from './theme-hook';
 import { ThemeConfig } from './theme.config';
