@@ -1,10 +1,10 @@
 {
-    "name": "cyhip-dynamic-themes",
-    "private": true,
-    "workspaces": [
-        "cyhip-dynamic-themes"
-    ],
-    "devDependencies": {
-        "pnpm": "^9.0.0"
-    }
+  "name": "cyhip-dynamic-themes",
+  "private": true,
+  "workspaces": [
+    "cyhip-dynamic-themes"
+  ],
+  "devDependencies": {
+    "pnpm": "^10.0.0"
+  }
 }

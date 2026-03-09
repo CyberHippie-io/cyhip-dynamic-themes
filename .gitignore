@@ -1,15 +1,9 @@
-**/node_modules
 .vscode
+**/node_modules
 **/dist
 
 
-dev-apps/
-examples/dev_lab
-
-bkp/
-
-TODO.md
+dev-apps
 
 pnpm-lock.yaml
 package-lock.json
-yarn.lock
