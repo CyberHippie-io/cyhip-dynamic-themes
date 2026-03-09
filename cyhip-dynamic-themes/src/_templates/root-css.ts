@@ -1,66 +1,196 @@
 const rootCss = `
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
+@import 'tailwindcss';
+@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 /* 
- * This is how your global.css or index.css should look like. 
- *
- * To see how to apply this variables declared here on tailwind
- * check ./theme-colors.ts properties examples.
- * 
- */
+  --------------------------------------------------------------------------
+  Tailwind Theme Tokens
+  --------------------------------------------------------------------------
 
-@layer base {
-    :root {
-        /* oklch vars - Applied by dynamic accent colors */
-        --background: var(--accent-50);
-        --foreground: var(--accent-900);
-        --primary: var(--accent-500);
-        --primary-foreground: var(--accent-50);
-        --secondary: var(--accent-200);
-        --secondary-foreground: var(--accent-900);
-        --ring: oklch(var(--accent-500) / 0.2);
-        --box-shadow: oklch(var(--accent-800) / 0.15);
-        --border: oklch(var(--accent-950) / 0.2);
-        /* hsl vars */
-        --muted: hsl(240 4.8% 95.9% / 0.6);
-        --muted-foreground: hsl(240 3.8% 65%);
-        --input: hsl(240 5.9% 90% / 0.5);
-    }
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        @apply outline-accent-500 dark:outline-accent-400;
-    }
-    *,
-    :after,
-    :before {
-        border-color: theme('colors.border');
-    }
+  Defines the design tokens used by Tailwind utilities.
+
+  Example token:
+
+  --color-primary
+
+  Generates utilities like:
+
+    bg-primary
+    text-primary
+    border-primary
+
+  'inline' is important because values depend on runtime CSS vars
+  (--accent-*) injected by the dynamic theme library.
+
+  Accent palette
+  ----------------
+  Maps the dynamic palette to Tailwind colors.
+
+  Example utility usage:
+
+    bg-accent-500
+    text-accent-700
+
+  Semantic tokens
+  ----------------
+   UI roles instead of raw colors:
+
+    primary
+    secondary
+    background
+    foreground
+
+  Example:
+
+    <button class="bg-primary text-primary-foreground">
+
+  Extend example:
+ 
+    --color-success: oklch(var(--success));
+      -> bg-success text-success
+
+*/
+
+@theme inline {
+    /* dynamic accent palette */
+    --color-accent-50: oklch(var(--accent-50));
+    --color-accent-100: oklch(var(--accent-100));
+    --color-accent-200: oklch(var(--accent-200));
+    --color-accent-300: oklch(var(--accent-300));
+    --color-accent-400: oklch(var(--accent-400));
+    --color-accent-500: oklch(var(--accent-500));
+    --color-accent-600: oklch(var(--accent-600));
+    --color-accent-700: oklch(var(--accent-700));
+    --color-accent-800: oklch(var(--accent-800));
+    --color-accent-900: oklch(var(--accent-900));
+    --color-accent-950: oklch(var(--accent-950));
+
+    /* semantic tokens */
+    --color-background: oklch(var(--background));
+    --color-foreground: oklch(var(--foreground));
+
+    --color-primary: oklch(var(--primary));
+    --color-primary-foreground: oklch(var(--primary-foreground));
+
+    --color-secondary: oklch(var(--secondary));
+    --color-secondary-foreground: oklch(var(--secondary-foreground));
+
+    --color-border: var(--border);
+    --color-ring: var(--ring);
 }
 
-.dark {
-    /* oklch vars - Applied by dynamic accent colors */
-    --background: var(--accent-950);
-    --foreground: var(--accent-100);
+/*
+ --------------------------------------------------------------------------
+ Light Theme Mapping
+ --------------------------------------------------------------------------
+
+ Maps the accent palette to semantic UI roles.
+
+ Example mapping:
+
+   accent-500 → primary
+   accent-200 → secondary
+   accent-100 → background
+
+ This allows changing the entire UI by only updating --accent-*
+ variables injected by the theme library.
+
+ Customize example:
+
+   --background: var(--accent-50);
+   --primary: var(--accent-600);
+
+*/
+:root {
+    --background: var(--accent-100);
+    --foreground: var(--accent-900);
+
     --primary: var(--accent-500);
     --primary-foreground: var(--accent-50);
+
+    --secondary: var(--accent-200);
+    --secondary-foreground: var(--accent-900);
+
+    --ring: oklch(var(--accent-500) / 0.2);
+    --border: oklch(var(--accent-950) / 0.2);
+}
+/*
+  --------------------------------------------------------------------------
+   Dark Theme Mapping
+  --------------------------------------------------------------------------
+ 
+  Overrides semantic tokens when .dark class is present.
+ 
+  Example:
+ 
+    <html class="dark">
+ 
+  Strategy: 
+    dark background -> darker accent
+    dark text -> lighter accent
+ 
+  Customize by remapping accent shades:
+ 
+    --background: var(--accent-950);
+ 
+*/
+[data-theme='dark'] {
+    --background: var(--accent-900);
+    --foreground: var(--accent-100);
+
+    --primary: var(--accent-500);
+    --primary-foreground: var(--accent-50);
+
     --secondary: var(--accent-800);
     --secondary-foreground: var(--accent-200);
-    --box-shadow: oklch(var(--accent-100) / 0.1);
-    --border: oklch(var(--accent-100) / 0.25);
 
-    /* hsl vars */
-    --muted: hsl(240 4.8% 25% / 0.7);
-    --muted-foreground: hsl(240 3.8% 70%);
-    --input: hsl(240 5.9% 80% / 0.8);
+    --border: oklch(var(--accent-100) / 0.25);
 }
 
+/*
+  --------------------------------------------------------------------------
+   Base Layer
+  --------------------------------------------------------------------------
+  
+   Global low-level styles applied before utilities.
+  
+   Includes:
+  
+   - border color from theme token
+   - default outline color
+   - box-sizing reset
+  
+   Example:
+  
+    border -> uses --color-border
+  
+   Extend here for global resets like:
+  
+    fonts
+    scrollbar
+    selection
+  
+*/
+
+@layer base {
+    *,
+    ::before,
+    ::after {
+        box-sizing: border-box;
+        border-color: var(--color-border);
+        @apply outline-accent-500 dark:outline-accent-400;
+    }
+}
+
+/*
+  --------------------------------------------------------------------------
+   App Defaults
+  --------------------------------------------------------------------------
+  
+   Sets the main page background and text color using semantic tokens.  
+  
+*/
 body {
-    @apply bg-background dark:bg-background;
-    @apply text-foreground;
+    @apply bg-background text-foreground;
     overflow-x: hidden;
 }
 

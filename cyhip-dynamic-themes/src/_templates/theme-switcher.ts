@@ -7,8 +7,8 @@ const themeSwitcher = `
  *
  */
 
-import { getChroma, ThemeConfig, useTheme } from 'cyhip-dynamic-themes';
-import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
+import { getChroma, useThemeHue, useThemeMode } from 'cyhip-dynamic-themes';
+import { forwardRef, type HTMLAttributes } from 'react';
 import { chromaData, hueScheme } from './theme.config';
 
 /**
@@ -26,71 +26,66 @@ const availableThemes: Record<string, string> = Object.keys(hueScheme).reduce(
         acc[key] = buildThemeSample(value);
         return acc;
     },
-    {} as Record<string, string>
+    {} as Record<string, string>,
 );
 
-const ThemeSwitcher = forwardRef<
-    HTMLDivElement,
-    HTMLAttributes<HTMLDivElement>
->(({ ...props }, ref) => {
-    /** To initialize here you can manage cookie values to reminder user preferences. */
-    const { theme, setTheme } = useTheme();
-    const [hue, setHue] = useState(theme.hue);
-    const [darkMode, setDarkMode] = useState(theme.mode === 'light');
+const ThemeSwitcher = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>(
+    ({ ...props }, ref) => {
+        const { setThemeHue } = useThemeHue();
+        const { setThemeMode } = useThemeMode();
 
-    useEffect(() => {
-        setTheme({
-            hue,
-            mode: darkMode ? 'dark' : 'light',
-            chromaData: chromaData,
-        } as ThemeConfig);
-    }, [hue, darkMode, setTheme]);
-
-    return (
-        <>
-            <div
-                ref={ref}
-                className="bg-accent-200/40 dark:bg-accent-700/40 grid grid-cols-3 rounded-sm gap-2 p-6"
-                {...props}
-            >
-                {Object.keys(availableThemes).map((key) => (
-                    <button
-                        key={key}
-                        className="bg-background px-4 py-1 text-sm font-medium rounded-ms border flex space-x-2 hover:ring-1 hover:ring-offset-2 hover:ring-offset-background hover:ring-primary"
-                        onClick={() => setHue(hueScheme[key])}
-                    >
-                        <span
-                            className="w-4 h-4 rounded-full"
-                            style={{
-                                background: availableThemes[key],
-                            }}
-                        ></span>
-                        <span>{key}</span>
-                    </button>
-                ))}
-                <div className="col-span-3 grid grid-cols-2 gap-x-2 mx-auto">
-                    <button
-                        className="bg-background border px-4 py-1 text-sm font-medium rounded-ms hover:ring-1 hover:ring-offset-2 hover:ring-offset-background hover:ring-primary"
-                        onClick={() => setDarkMode(false)}
-                    >
-                        Light
-                    </button>
-                    <button
-                        className="bg-background border px-4 py-1 text-sm font-medium rounded-ms hover:ring-1 hover:ring-offset-2 hover:ring-offset-background hover:ring-primary"
-                        onClick={() => setDarkMode(true)}
-                    >
-                        Dark
-                    </button>
+        return (
+            <>
+                <div
+                    ref={ref}
+                    className="bg-accent-200/40 dark:bg-accent-700/40 grid grid-cols-3 rounded-sm 
+                            gap-2 p-6"
+                    {...props}
+                >
+                    {Object.keys(availableThemes).map((key) => (
+                        <button
+                            key={key}
+                            className="bg-background px-4 py-1 text-sm font-medium rounded-ms border
+                                    flex space-x-2 hover:ring-1 hover:ring-offset-2 
+                                    hover:ring-offset-background hover:ring-primary cursor-pointer"
+                            onClick={() => setThemeHue(hueScheme[key])}
+                        >
+                            <span
+                                className="w-4 h-4 rounded-full"
+                                style={{
+                                    background: availableThemes[key],
+                                }}
+                            ></span>
+                            <span>{key}</span>
+                        </button>
+                    ))}
+                    <div className="col-span-3 grid grid-cols-2 gap-x-2 mx-auto">
+                        <button
+                            className="bg-background border px-4 py-1 text-sm font-medium rounded-ms 
+                                    hover:ring-1 hover:ring-offset-2 hover:ring-offset-background
+                                    hover:ring-primary cursor-pointer"
+                            onClick={() => setThemeMode(false)}
+                        >
+                            Light
+                        </button>
+                        <button
+                            className="bg-background border px-4 py-1 text-sm font-medium rounded-ms
+                                    hover:ring-1 hover:ring-offset-2 hover:ring-offset-background
+                                    hover:ring-primary cursor-pointer"
+                            onClick={() => setThemeMode(true)}
+                        >
+                            Dark
+                        </button>
+                    </div>
                 </div>
-            </div>
-        </>
-    );
-});
+            </>
+        );
+    },
+);
 
 ThemeSwitcher.displayName = 'ThemeSwitcher';
 
 export { ThemeSwitcher };
-
 
 `;
 export default themeSwitcher;
