@@ -1,26 +1,23 @@
-'use client'; // enable on Nextjs
-
-import { updateTheme, useTheme } from './theme-hook';
-import React, { useEffect, useState, type ReactNode } from 'react';
+import React, { useLayoutEffect, type ReactNode } from 'react';
+import { useTheme } from './theme-hook';
 import { ThemeConfig } from './theme.config';
 
 interface ThemeProviderProps {
     children: ReactNode;
     themeConfig: ThemeConfig;
+    enableStorage?: boolean;
 }
 
-const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, themeConfig }) => {
-    const { theme } = useTheme();
-    const [isInitialized, setIsInitialized] = useState(false);
+const ThemeProvider: React.FC<ThemeProviderProps> = ({
+    children,
+    themeConfig,
+    enableStorage = true,
+}) => {
+    const { setTheme } = useTheme();
 
-    useEffect(() => {
-        if (!isInitialized) {
-            setIsInitialized(true);
-            updateTheme(themeConfig);
-        }
-    }, [theme, isInitialized]);
-
-    if (!isInitialized) return null;
+    useLayoutEffect(() => {
+        setTheme(themeConfig, enableStorage);
+    }, [themeConfig, enableStorage, setTheme]);
 
     return <>{children}</>;
 };

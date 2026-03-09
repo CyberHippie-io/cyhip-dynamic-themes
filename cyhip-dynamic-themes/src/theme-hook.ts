@@ -1,30 +1,62 @@
-import { getThemeProperties } from "./theme-helpers";
 import { create } from 'zustand';
-import { chromaData, ThemeConfig } from "./theme.config";
+import { useShallow } from 'zustand/react/shallow';
+import { getThemeProperties } from './theme-helpers';
+import { saveStoredTheme } from './theme-storage';
+import { chromaData, ThemeConfig, ThemeMode } from './theme.config';
 
-
-const updateTheme = (themeConfig: ThemeConfig): void => {
-    const { className, style } = getThemeProperties(themeConfig.hue, themeConfig.mode === 'dark', themeConfig.chromaData);
-    document.documentElement.className = className;
-    document.documentElement.style.setProperty('--color-scheme', themeConfig.mode);
+const applyTheme = (themeConfig: ThemeConfig, enableStorage: boolean = true): void => {
+    const { dataTheme, style } = getThemeProperties(themeConfig);
+    document.documentElement.setAttribute('data-theme', dataTheme);
     Object.entries(style).forEach(([key, value]) => {
         document.documentElement.style.setProperty(key, value);
     });
+
+    if (enableStorage) {
+        saveStoredTheme(themeConfig);
+    }
 };
 
 type ThemeState = {
     theme: ThemeConfig;
-    setTheme: (theme: ThemeConfig) => void;
-
+    setTheme: (theme: ThemeConfig, enableStorage?: boolean) => void;
+    setThemeHue: (hue: number, enableStorage?: boolean) => void;
+    setThemeMode: (darkMode: boolean, enableStorage?: boolean) => void;
 };
 
-const useTheme = create<ThemeState>((set, get) => ({
-    theme: { hue: 250, mode: 'light', chromaData },
-    setTheme: (theme: ThemeConfig) => {
+const useTheme = create<ThemeState>((set) => ({
+    theme: { hue: 250, mode: 'light', chromaData: chromaData },
+    setTheme: (theme: ThemeConfig, enableStorage: boolean = true) => {
         set({ theme });
-        updateTheme(theme);
+        applyTheme(theme, enableStorage);
     },
-    
+    setThemeHue: (hue: number, enableStorage: boolean = true) => {
+        set((state) => {
+            const theme = { ...state.theme, hue };
+            applyTheme(theme, enableStorage);
+            return { theme };
+        });
+    },
+    setThemeMode: (darkMode: boolean, enableStorage: boolean = true) => {
+        set((state) => {
+            const mode: ThemeMode = darkMode ? 'dark' : 'light';
+            const theme = { ...state.theme, mode };
+            applyTheme(theme, enableStorage);
+            return { theme };
+        });
+    },
 }));
 
-export { updateTheme, useTheme };
+/* selectors (derived hooks) */
+const themeModeSelector = (s: ThemeState) => ({
+    mode: s.theme.mode,
+    setThemeMode: s.setThemeMode,
+});
+const themeHueSelector = (s: ThemeState) => ({
+    hue: s.theme.hue,
+    setThemeHue: s.setThemeHue,
+});
+
+const useThemeMode = () => useTheme(useShallow(themeModeSelector));
+const useThemeHue = () => useTheme(useShallow(themeHueSelector));
+
+export { useTheme, useThemeHue, useThemeMode };
