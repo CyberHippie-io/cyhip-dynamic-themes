@@ -20,7 +20,7 @@ type ThemeState = {
     theme: ThemeConfig;
     setTheme: (theme: ThemeConfig, enableStorage?: boolean) => void;
     setThemeHue: (hue: number, enableStorage?: boolean) => void;
-    setThemeMode: (darkMode: boolean, enableStorage?: boolean) => void;
+    setThemeMode: (mode: ThemeMode, enableStorage?: boolean) => void;
 };
 
 const useTheme = create<ThemeState>((set) => ({
@@ -36,9 +36,8 @@ const useTheme = create<ThemeState>((set) => ({
             return { theme };
         });
     },
-    setThemeMode: (darkMode: boolean, enableStorage: boolean = true) => {
+    setThemeMode: (mode: ThemeMode, enableStorage: boolean = true) => {
         set((state) => {
-            const mode: ThemeMode = darkMode ? 'dark' : 'light';
             const theme = { ...state.theme, mode };
             applyTheme(theme, enableStorage);
             return { theme };

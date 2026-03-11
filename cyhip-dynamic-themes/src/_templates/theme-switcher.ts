@@ -39,13 +39,13 @@ const ThemeSwitcher = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>
                 <div
                     ref={ref}
                     className="bg-accent-200/40 dark:bg-accent-700/40 grid grid-cols-3 rounded-sm 
-                            gap-2 p-6"
+                            gap-2 p-6 text-sm font-medium"
                     {...props}
                 >
                     {Object.keys(availableThemes).map((key) => (
                         <button
                             key={key}
-                            className="bg-background px-4 py-1 text-sm font-medium rounded-ms border
+                            className="bg-background px-4 py-1 rounded-ms border
                                     flex space-x-2 hover:ring-1 hover:ring-offset-2 
                                     hover:ring-offset-background hover:ring-primary cursor-pointer"
                             onClick={() => setThemeHue(hueScheme[key])}
@@ -61,18 +61,18 @@ const ThemeSwitcher = forwardRef<HTMLDivElement, HTMLAttributes<HTMLDivElement>>
                     ))}
                     <div className="col-span-3 grid grid-cols-2 gap-x-2 mx-auto">
                         <button
-                            className="bg-background border px-4 py-1 text-sm font-medium rounded-ms 
+                            className="bg-background border px-4 py-1 rounded-ms 
                                     hover:ring-1 hover:ring-offset-2 hover:ring-offset-background
                                     hover:ring-primary cursor-pointer"
-                            onClick={() => setThemeMode(false)}
+                            onClick={() => setThemeMode('light')}
                         >
                             Light
                         </button>
                         <button
-                            className="bg-background border px-4 py-1 text-sm font-medium rounded-ms
+                            className="bg-background border px-4 py-1 rounded-ms
                                     hover:ring-1 hover:ring-offset-2 hover:ring-offset-background
                                     hover:ring-primary cursor-pointer"
-                            onClick={() => setThemeMode(true)}
+                            onClick={() => setThemeMode('dark')}
                         >
                             Dark
                         </button>
