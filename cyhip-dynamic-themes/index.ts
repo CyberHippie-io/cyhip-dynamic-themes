@@ -4,7 +4,8 @@ export { consistentChroma as getChroma } from './lib/tw-dynamic-themes/runtime';
 export { dynamicTwClasses } from './lib/tw-dynamic-themes/twPlugin';
 export { currentAccentValue, getThemeProperties } from './src/theme-helpers';
 export { useTheme, useThemeHue, useThemeMode } from './src/theme-hook';
-export { loadStoredTheme } from './src/theme-storage';
+export { defaultThemeStorage } from './src/theme-storage';
+export type { ThemeStorage } from './src/theme-storage';
 export { type ThemeColor, type ThemeConfig, type ThemeMode } from './src/theme.config';
 
 export { ThemeProvider } from './src/theme-provider';

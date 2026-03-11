@@ -1,26 +1,41 @@
 'use client'; // enable for next
-import React, { useLayoutEffect, type ReactNode } from 'react';
+import { useLayoutEffect, useState } from 'react';
 import { useTheme } from './theme-hook';
+import { ThemeStorage } from './theme-storage';
 import { ThemeConfig } from './theme.config';
 
 interface ThemeProviderProps {
-    children: ReactNode;
+    children: React.ReactNode;
     themeConfig: ThemeConfig;
-    enableStorage?: boolean;
+    storage?: ThemeStorage;
 }
 
-const ThemeProvider: React.FC<ThemeProviderProps> = ({
-    children,
-    themeConfig,
-    enableStorage = true,
-}) => {
-    const { setTheme } = useTheme();
+function ThemeProvider({ children, themeConfig, storage }: ThemeProviderProps) {
+    const { setStorage, setTheme } = useTheme();
+    const [ready, setReady] = useState(false);
 
     useLayoutEffect(() => {
-        setTheme(themeConfig, enableStorage);
-    }, [themeConfig, enableStorage, setTheme]);
+        let theme: ThemeConfig = themeConfig;
+
+        setStorage(storage ?? null);
+
+        if (storage) {
+            const stored = storage.load();
+            if (stored) {
+                theme = {
+                    ...themeConfig,
+                    ...stored,
+                };
+            }
+        }
+
+        setTheme(theme);
+        setReady(true);
+    }, [themeConfig, storage, setTheme]);
+
+    if (!ready) return null;
 
     return <>{children}</>;
-};
+}
 
 export { ThemeProvider };

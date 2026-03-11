@@ -11,7 +11,12 @@ const themeConfig = `
  *
  */
 
-import { loadStoredTheme, type ThemeConfig } from 'cyhip-dynamic-themes';
+import {
+    defaultThemeStorage,
+    getChroma,
+    type ThemeConfig,
+    type ThemeStorage,
+} from 'cyhip-dynamic-themes';
 
 export const hueScheme: Record<string, number> = {
     default: -1,
@@ -43,6 +48,20 @@ export const chromaData: Record<number, number> = {
 };
 
 /**
+ * Declares the available color palette.
+ */
+
+type ITheme = {
+    [name: string]: string;
+};
+
+export const availableThemes: ITheme = Object.keys(hueScheme).reduce((acc, key) => {
+    const hueValue = hueScheme[key];
+    acc[key] = 'oklch(' + getChroma(5, hueValue, chromaData) + ')';
+    return acc;
+}, {} as ITheme);
+
+/**
  * Default theme configuration used by the application.
  *
  * This serves as the base theme when the app initializes.
@@ -53,51 +72,26 @@ export const chromaData: Record<number, number> = {
  * color hue, mode (light/dark), and chroma settings
  * used throughout your application.
  */
-const defaultTheme: ThemeConfig = {
+export const defaultTheme: ThemeConfig = {
     hue: 250,
     mode: 'light',
     chromaData: chromaData,
 };
 
 /**
- * Controls whether the library should manage theme persistence
- * using its built-in local-storage handler.
+ * Theme persistence handler.
  *
- * When enabled, the user's theme preferences (hue and mode)
- * are automatically saved and restored using the internal
- * storage utilities provided by 'cyhip-dynamic-themes'.
+ * Defines how the user's theme preferences (hue and mode)
+ * are loaded and saved.
  *
- * If you prefer to manage persistence yourself (for example,
- * using your own storage strategy or server-side logic),
- * you can disable this option and implement a custom solution.
+ * By default, the library provides a localStorage-based
+ * implementation (defaultThemeStorage).
+ *
+ * If you prefer to manage persistence using a different
+ * strategy (cookies, API, indexedDB, etc.), you can replace
+ * this with your own ThemeStorage implementation.
  */
-export const enableThemeStorage = true;
-
-/**
- * Initializes the theme configuration for the application.
- *
- * If theme storage is enabled, this function attempts to load
- * the user's previously saved theme preferences and merges them
- * with the default theme configuration.
- *
- * If storage is disabled or no stored theme is found, the
- * 'defaultTheme' values are returned instead.
- */
-export const getThemeConfig = (enableStorage: boolean = enableThemeStorage): ThemeConfig => {
-    if (!enableStorage) return defaultTheme;
-
-    // Attempt to load the user's previously saved theme preferences.
-    // If you are using a custom persistence strategy, replace this
-    // with your own method responsible for retrieving the stored theme.
-    const themeData = loadStoredTheme();
-
-    return {
-        hue: themeData?.hue ?? defaultTheme.hue,
-        mode: themeData?.mode ?? defaultTheme.mode,
-        chromaData: defaultTheme.chromaData,
-    };
-};
-
+export const themeStorage: ThemeStorage = defaultThemeStorage;
 
 `;
 

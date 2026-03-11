@@ -1,45 +1,56 @@
 import { create } from 'zustand';
 import { useShallow } from 'zustand/react/shallow';
 import { getThemeProperties } from './theme-helpers';
-import { saveStoredTheme } from './theme-storage';
+import { ThemeStorage } from './theme-storage';
 import { chromaData, ThemeConfig, ThemeMode } from './theme.config';
 
-const applyTheme = (themeConfig: ThemeConfig, enableStorage: boolean = true): void => {
+const applyTheme = (themeConfig: ThemeConfig, storage?: ThemeStorage | null): void => {
     const { dataTheme, style } = getThemeProperties(themeConfig);
     document.documentElement.setAttribute('data-theme', dataTheme);
     Object.entries(style).forEach(([key, value]) => {
         document.documentElement.style.setProperty(key, value);
     });
 
-    if (enableStorage) {
-        saveStoredTheme(themeConfig);
+    if (storage) {
+        storage.save(themeConfig);
     }
 };
 
 type ThemeState = {
     theme: ThemeConfig;
-    setTheme: (theme: ThemeConfig, enableStorage?: boolean) => void;
-    setThemeHue: (hue: number, enableStorage?: boolean) => void;
-    setThemeMode: (mode: ThemeMode, enableStorage?: boolean) => void;
+    storage: ThemeStorage | null;
+    setStorage: (storage: ThemeStorage | null) => void;
+    setTheme: (theme: ThemeConfig) => void;
+    setThemeHue: (hue: number) => void;
+    setThemeMode: (mode: ThemeMode) => void;
 };
 
 const useTheme = create<ThemeState>((set) => ({
     theme: { hue: 250, mode: 'light', chromaData: chromaData },
-    setTheme: (theme: ThemeConfig, enableStorage: boolean = true) => {
-        set({ theme });
-        applyTheme(theme, enableStorage);
-    },
-    setThemeHue: (hue: number, enableStorage: boolean = true) => {
+    storage: null,
+    setTheme: (theme: ThemeConfig) => {
         set((state) => {
-            const theme = { ...state.theme, hue };
-            applyTheme(theme, enableStorage);
+            applyTheme(theme, state.storage);
             return { theme };
         });
     },
-    setThemeMode: (mode: ThemeMode, enableStorage: boolean = true) => {
+
+    setStorage: (storage: ThemeStorage | null) => {
+        set({ storage });
+    },
+
+    setThemeHue: (hue: number) => {
+        set((state) => {
+            const theme = { ...state.theme, hue };
+            applyTheme(theme, state.storage);
+            return { theme };
+        });
+    },
+
+    setThemeMode: (mode: ThemeMode) => {
         set((state) => {
             const theme = { ...state.theme, mode };
-            applyTheme(theme, enableStorage);
+            applyTheme(theme, state.storage);
             return { theme };
         });
     },
