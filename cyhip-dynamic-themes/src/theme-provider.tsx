@@ -1,28 +1,41 @@
-'use client'; // enable on Nextjs
-
-import { updateTheme, useTheme } from './theme-hook';
-import React, { useEffect, useState, type ReactNode } from 'react';
+'use client'; // enable for next
+import { useLayoutEffect, useState } from 'react';
+import { useTheme } from './theme-hook';
+import { ThemeStorage } from './theme-storage';
 import { ThemeConfig } from './theme.config';
 
 interface ThemeProviderProps {
-    children: ReactNode;
+    children: React.ReactNode;
     themeConfig: ThemeConfig;
+    storage?: ThemeStorage;
 }
 
-const ThemeProvider: React.FC<ThemeProviderProps> = ({ children, themeConfig }) => {
-    const { theme } = useTheme();
-    const [isInitialized, setIsInitialized] = useState(false);
+function ThemeProvider({ children, themeConfig, storage }: ThemeProviderProps) {
+    const { setStorage, setTheme } = useTheme();
+    const [ready, setReady] = useState(false);
 
-    useEffect(() => {
-        if (!isInitialized) {
-            setIsInitialized(true);
-            updateTheme(themeConfig);
+    useLayoutEffect(() => {
+        let theme: ThemeConfig = themeConfig;
+
+        setStorage(storage ?? null);
+
+        if (storage) {
+            const stored = storage.load();
+            if (stored) {
+                theme = {
+                    ...themeConfig,
+                    ...stored,
+                };
+            }
         }
-    }, [theme, isInitialized]);
 
-    if (!isInitialized) return null;
+        setTheme(theme);
+        setReady(true);
+    }, [themeConfig, storage, setTheme]);
+
+    if (!ready) return null;
 
     return <>{children}</>;
-};
+}
 
 export { ThemeProvider };
