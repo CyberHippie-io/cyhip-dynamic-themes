@@ -1,5 +1,5 @@
 import { getVariables } from '../lib/tw-dynamic-themes/runtime';
-import { chromaData as defaultChromaData } from './theme.config';
+import { ThemeConfig } from './theme.config';
 
 /**
  * getThemeProperties
@@ -8,37 +8,30 @@ import { chromaData as defaultChromaData } from './theme.config';
  *
  * - If `hue` is "-1", the theme is monochromatic, which affects the accent color behavior.
  * - Returns an object with:
- *    - `className`: A string containing the class for dark mode ("dark") or an empty string for light mode.
+ *    - `dataTheme`: A string containing the class for dark mode ("dark") or an empty string for light mode.
  *    - `style`: A record with dynamically generated CSS variables for the accent colors.
  *
  */
 export const getThemeProperties = (
-    hue: number,
-    darkMode: boolean,
-    chromaData: Record<number, number> = defaultChromaData,
-): { className: string; style: Record<string, string> } => {
-    const whitePalette = hue == -1;
+    themeConfig: ThemeConfig,
+): { dataTheme: string; style: Record<string, string> } => {
+    const whitePalette = themeConfig.hue == -1;
+    const darkMode = themeConfig.mode == 'dark';
 
     const accent = getVariables({
         baseName: 'accent',
-        hue: hue,
-        chromaData: chromaData,
+        hue: themeConfig.hue,
+        chromaData: themeConfig.chromaData,
     });
 
-    // whitePalette have a different accent behavior for accent values
+    // white pallet have a different accent behavior
     if (whitePalette) {
-        accent.push([
-            '--accent-500',
-            darkMode ? '1.000 0.000 89.876' : '0.212 0.000 359.000',
-        ]);
-        accent.push([
-            '--accent-50',
-            darkMode ? '0.212 0.000 359.000' : '1.000 0.000 89.876',
-        ]);
+        accent.push(['--accent-500', darkMode ? '1.000 0.000 89.876' : '0.212 0.000 359.000']);
+        accent.push(['--accent-50', darkMode ? '0.212 0.000 359.000' : '1.000 0.000 89.876']);
     }
 
     return {
-        className: darkMode ? 'dark' : '',
+        dataTheme: darkMode ? 'dark' : 'light',
         style: Object.fromEntries(accent),
     };
 };

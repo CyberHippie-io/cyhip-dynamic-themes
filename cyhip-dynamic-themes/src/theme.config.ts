@@ -7,7 +7,6 @@ export type ThemeMode = 'light' | 'dark';
 // Hue value, chromaData as default.
 export type ThemeColor = number;
 
-
 export type ThemeConfig = {
     hue: ThemeColor;
     mode: ThemeMode;
