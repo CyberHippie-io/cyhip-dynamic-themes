@@ -101,7 +101,7 @@ const rootCss = `
 
 */
 :root {
-    --background: var(--accent-100);
+    --background: var(--accent-50);
     --foreground: var(--accent-900);
 
     --primary: var(--accent-500);
@@ -134,7 +134,7 @@ const rootCss = `
  
 */
 [data-theme='dark'] {
-    --background: var(--accent-900);
+    --background: var(--accent-950);
     --foreground: var(--accent-100);
 
     --primary: var(--accent-500);
