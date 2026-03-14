@@ -1,0 +1,87 @@
+'use client';
+import { MoonIcon } from '@/components/ui/icons/moon';
+import { SolarIcon } from '@/components/ui/icons/solar';
+import { cn } from '@/lib/utils';
+import { availableThemes, hueScheme } from '@/themes/theme.config';
+import { DivProps } from '@/types/dom';
+import { useThemeHue, useThemeMode } from 'cyhip-dynamic-themes';
+import { useMemo } from 'react';
+
+export function ThemeSwitcher({ props }: { props?: DivProps }) {
+    return (
+        <div className={cn(props?.className, 'auto-cols grid grid-flow-row gap-2')}>
+            <div className="rounded border">
+                <ColorPaletteMenu />
+            </div>
+            <div className="">
+                <ThemeModeMenu />
+            </div>
+        </div>
+    );
+}
+
+function ColorPaletteMenu({ props }: { props?: DivProps }) {
+    const { hue, setThemeHue } = useThemeHue();
+
+    const selected = useMemo(
+        () => Object.keys(hueScheme).find((key) => hueScheme[key] === hue) ?? null,
+        [hue],
+    );
+
+    const changeColorPalete = (key: string) => {
+        setThemeHue(hueScheme[key]);
+    };
+
+    return (
+        <div className={cn(props?.className, 'm-3 grid auto-cols-max grid-flow-col gap-4')}>
+            {Object.keys(availableThemes).map((key) => (
+                <button
+                    type="button"
+                    key={key}
+                    className="relative cursor-pointer"
+                    onClick={() => changeColorPalete(key)}
+                >
+                    {selected === key && (
+                        <span
+                            className={cn(
+                                'border-accent-400 absolute -inset-1 block h-8 w-8 rounded-full border-2',
+                            )}
+                        />
+                    )}
+                    <span
+                        className="block h-6 w-6 rounded-full"
+                        style={{ background: availableThemes[key] }}
+                    />
+                </button>
+            ))}
+        </div>
+    );
+}
+
+function ThemeModeMenu({ props }: { props?: DivProps }) {
+    const { mode, setThemeMode } = useThemeMode();
+
+    const changeThemeMode = (mode: 'light' | 'dark') => {
+        setThemeMode(mode);
+    };
+
+    const btnStyle = cn('border px-2 py-2 rounded-md cursor-pointer hover:ring-1');
+    return (
+        <div className={cn(props?.className, 'm-2 flex justify-center gap-4')}>
+            <button
+                type="button"
+                className={cn(btnStyle, mode === 'light' && 'ring-1')}
+                onClick={() => changeThemeMode('light')}
+            >
+                <SolarIcon className="h-4 w-5" />
+            </button>
+            <button
+                type="button"
+                className={cn(btnStyle, mode === 'dark' && 'ring-1')}
+                onClick={() => changeThemeMode('dark')}
+            >
+                <MoonIcon className="h-4 w-5" />
+            </button>
+        </div>
+    );
+}
