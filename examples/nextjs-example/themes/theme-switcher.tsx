@@ -1,56 +1,146 @@
 'use client';
+
+import { Button } from '@/components/ui/button';
 import { MoonIcon } from '@/components/ui/icons/moon';
 import { SolarIcon } from '@/components/ui/icons/solar';
+import { Select, SelectContent, SelectItem, SelectTrigger } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
 import { availableThemes, hueScheme } from '@/themes/theme.config';
-import { DivProps } from '@/types/dom';
 import { useThemeHue, useThemeMode } from 'cyhip-dynamic-themes';
 import { useMemo } from 'react';
 
-export function ThemeSwitcher({ props }: { props?: DivProps }) {
+type ThemeSwitcherProps = {
+    className?: string;
+    compact?: boolean;
+};
+
+type HueKey = keyof typeof hueScheme;
+
+const hueEntries = Object.entries(hueScheme) as [HueKey, number][];
+
+const hueLabels: Record<HueKey, string> = {
+    default: 'Default',
+    blue: 'Blue',
+    green: 'Green',
+    orange: 'Orange',
+    pink: 'Pink',
+    purple: 'Purple',
+};
+
+export function ThemeSwitcher({ className, compact = false }: ThemeSwitcherProps) {
+    if (compact) {
+        return <CompactThemeSwitcher className={className} />;
+    }
+
     return (
-        <div className={cn(props?.className, 'auto-cols grid grid-flow-row gap-2')}>
-            <div className="rounded border">
-                <ColorPaletteMenu />
-            </div>
-            <div className="">
+        <div
+            className={cn(
+                'rounded-2xl border border-border/80 bg-card/90 p-4 shadow-sm backdrop-blur-sm',
+                className,
+            )}
+        >
+            <div className="mb-4 flex items-center justify-between gap-2">
+                <p className="text-sm font-medium">Theme Controls</p>
                 <ThemeModeMenu />
+            </div>
+            <ColorPaletteMenu />
+        </div>
+    );
+}
+
+function CompactThemeSwitcher({ className }: { className?: string }) {
+    const { hue, setThemeHue } = useThemeHue();
+    const { mode, setThemeMode } = useThemeMode();
+
+    const selectedHue = useMemo(
+        () => hueEntries.find(([, value]) => value === hue)?.[0] ?? 'default',
+        [hue],
+    );
+
+    return (
+        <div className={cn('flex items-center gap-2', className)}>
+            <Select
+                value={selectedHue}
+                onValueChange={(value) => {
+                    const key = value as HueKey;
+                    setThemeHue(hueScheme[key]);
+                }}
+            >
+                <SelectTrigger className="w-34 bg-background/90">
+                    <span className="flex items-center gap-2">
+                        <span
+                            className="size-2.5 rounded-full"
+                            style={{ backgroundColor: availableThemes[selectedHue] }}
+                        />
+                        {hueLabels[selectedHue]}
+                    </span>
+                </SelectTrigger>
+                <SelectContent align="end" className="min-w-36">
+                    {hueEntries.map(([key]) => (
+                        <SelectItem key={key} value={key}>
+                            <span className="flex items-center gap-2">
+                                <span
+                                    className="size-2.5 rounded-full"
+                                    style={{ backgroundColor: availableThemes[key] }}
+                                />
+                                {hueLabels[key]}
+                            </span>
+                        </SelectItem>
+                    ))}
+                </SelectContent>
+            </Select>
+
+            <div className="flex items-center gap-1 rounded-xl border border-border/80 bg-background/90 p-1">
+                <Button
+                    type="button"
+                    variant={mode === 'light' ? 'default' : 'ghost'}
+                    size="icon-sm"
+                    aria-label="Switch to light mode"
+                    onClick={() => setThemeMode('light')}
+                >
+                    <SolarIcon className="h-4 w-4" />
+                </Button>
+                <Button
+                    type="button"
+                    variant={mode === 'dark' ? 'default' : 'ghost'}
+                    size="icon-sm"
+                    aria-label="Switch to dark mode"
+                    onClick={() => setThemeMode('dark')}
+                >
+                    <MoonIcon className="h-4 w-4" />
+                </Button>
             </div>
         </div>
     );
 }
 
-function ColorPaletteMenu({ props }: { props?: DivProps }) {
+function ColorPaletteMenu() {
     const { hue, setThemeHue } = useThemeHue();
 
     const selected = useMemo(
-        () => Object.keys(hueScheme).find((key) => hueScheme[key] === hue) ?? null,
+        () => hueEntries.find(([, value]) => value === hue)?.[0] ?? null,
         [hue],
     );
 
-    const changeColorPalete = (key: string) => {
-        setThemeHue(hueScheme[key]);
-    };
-
     return (
-        <div className={cn(props?.className, 'm-3 grid auto-cols-max grid-flow-col gap-4')}>
-            {Object.keys(availableThemes).map((key) => (
+        <div className="grid auto-cols-max grid-flow-col gap-3">
+            {hueEntries.map(([key]) => (
                 <button
                     type="button"
                     key={key}
-                    className="relative cursor-pointer"
-                    onClick={() => changeColorPalete(key)}
+                    className="group relative cursor-pointer"
+                    aria-label={`Select ${hueLabels[key]} theme`}
+                    onClick={() => setThemeHue(hueScheme[key])}
                 >
-                    {selected === key && (
-                        <span
-                            className={cn(
-                                'border-accent-400 absolute -inset-1 block h-8 w-8 rounded-full border-2',
-                            )}
-                        />
-                    )}
                     <span
-                        className="block h-6 w-6 rounded-full"
-                        style={{ background: availableThemes[key] }}
+                        className={cn(
+                            'absolute -inset-1 rounded-full border-2 border-transparent transition-colors',
+                            selected === key && 'border-accent-500',
+                        )}
+                    />
+                    <span
+                        className="block h-6 w-6 rounded-full ring-1 ring-foreground/20 transition-transform group-hover:scale-105"
+                        style={{ backgroundColor: availableThemes[key] }}
                     />
                 </button>
             ))}
@@ -58,30 +148,29 @@ function ColorPaletteMenu({ props }: { props?: DivProps }) {
     );
 }
 
-function ThemeModeMenu({ props }: { props?: DivProps }) {
+function ThemeModeMenu() {
     const { mode, setThemeMode } = useThemeMode();
 
-    const changeThemeMode = (mode: 'light' | 'dark') => {
-        setThemeMode(mode);
-    };
-
-    const btnStyle = cn('border px-2 py-2 rounded-md cursor-pointer hover:ring-1');
     return (
-        <div className={cn(props?.className, 'm-2 flex justify-center gap-4')}>
-            <button
+        <div className="flex items-center gap-1 rounded-xl border border-border/80 bg-background/90 p-1">
+            <Button
                 type="button"
-                className={cn(btnStyle, mode === 'light' && 'ring-1')}
-                onClick={() => changeThemeMode('light')}
+                variant={mode === 'light' ? 'default' : 'ghost'}
+                size="icon-sm"
+                aria-label="Switch to light mode"
+                onClick={() => setThemeMode('light')}
             >
-                <SolarIcon className="h-4 w-5" />
-            </button>
-            <button
+                <SolarIcon className="h-4 w-4" />
+            </Button>
+            <Button
                 type="button"
-                className={cn(btnStyle, mode === 'dark' && 'ring-1')}
-                onClick={() => changeThemeMode('dark')}
+                variant={mode === 'dark' ? 'default' : 'ghost'}
+                size="icon-sm"
+                aria-label="Switch to dark mode"
+                onClick={() => setThemeMode('dark')}
             >
-                <MoonIcon className="h-4 w-5" />
-            </button>
+                <MoonIcon className="h-4 w-4" />
+            </Button>
         </div>
     );
 }

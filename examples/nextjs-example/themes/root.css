@@ -1,56 +1,9 @@
 @import 'tailwindcss';
+@import 'tw-animate-css';
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-/* 
-  --------------------------------------------------------------------------
-  Tailwind Theme Tokens
-  --------------------------------------------------------------------------
-
-  Defines the design tokens used by Tailwind utilities.
-
-  Example token:
-
-  --color-primary
-
-  Generates utilities like:
-
-    bg-primary
-    text-primary
-    border-primary
-
-  'inline' is important because values depend on runtime CSS vars
-  (--accent-*) injected by the dynamic theme library.
-
-  Accent palette
-  ----------------
-  Maps the dynamic palette to Tailwind colors.
-
-  Example utility usage:
-
-    bg-accent-500
-    text-accent-700
-
-  Semantic tokens
-  ----------------
-   UI roles instead of raw colors:
-
-    primary
-    secondary
-    background
-    foreground
-
-  Example:
-
-    <button class="bg-primary text-primary-foreground">
-
-  Extend example:
- 
-    --color-success: oklch(var(--success));
-      -> bg-success text-success
-
-*/
 
 @theme inline {
-    /* dynamic accent palette */
     --color-accent-50: oklch(var(--accent-50));
     --color-accent-100: oklch(var(--accent-100));
     --color-accent-200: oklch(var(--accent-200));
@@ -63,132 +16,215 @@
     --color-accent-900: oklch(var(--accent-900));
     --color-accent-950: oklch(var(--accent-950));
 
-    /* semantic tokens */
     --color-background: oklch(var(--background));
     --color-foreground: oklch(var(--foreground));
 
+    --color-card: oklch(var(--card));
+    --color-card-foreground: oklch(var(--card-foreground));
+    --color-popover: oklch(var(--popover));
+    --color-popover-foreground: oklch(var(--popover-foreground));
+
     --color-primary: oklch(var(--primary));
     --color-primary-foreground: oklch(var(--primary-foreground));
-
     --color-secondary: oklch(var(--secondary));
     --color-secondary-foreground: oklch(var(--secondary-foreground));
 
+    --color-muted: oklch(var(--muted));
+    --color-muted-foreground: oklch(var(--muted-foreground));
+    --color-accent: oklch(var(--accent));
+    --color-accent-foreground: oklch(var(--accent-foreground));
+    --color-destructive: oklch(var(--destructive));
+
     --color-border: var(--border);
+    --color-input: var(--input);
     --color-ring: var(--ring);
+
+    --color-chart-1: oklch(var(--chart-1));
+    --color-chart-2: oklch(var(--chart-2));
+    --color-chart-3: oklch(var(--chart-3));
+    --color-chart-4: oklch(var(--chart-4));
+    --color-chart-5: oklch(var(--chart-5));
+
+    --font-sans: var(--font-sans);
+    --font-display: var(--font-display);
+
+    --radius-sm: calc(var(--radius) * 0.6);
+    --radius-md: calc(var(--radius) * 0.8);
+    --radius-lg: var(--radius);
+    --radius-xl: calc(var(--radius) * 1.4);
 }
 
-/*
- --------------------------------------------------------------------------
- Light Theme Mapping
- --------------------------------------------------------------------------
-
- Maps the accent palette to semantic UI roles.
-
- Example mapping:
-
-   accent-500 → primary
-   accent-200 → secondary
-   accent-100 → background
-
- This allows changing the entire UI by only updating --accent-*
- variables injected by the theme library.
-
- Customize example:
-
-   --background: var(--accent-50);
-   --primary: var(--accent-600);
-
-*/
 :root {
     --background: var(--accent-50);
     --foreground: var(--accent-900);
 
+    --card: var(--accent-50);
+    --card-foreground: var(--accent-900);
+    --popover: var(--accent-50);
+    --popover-foreground: var(--accent-900);
+
     --primary: var(--accent-500);
     --primary-foreground: var(--accent-50);
-
     --secondary: var(--accent-200);
     --secondary-foreground: var(--accent-900);
 
-    --ring: oklch(var(--accent-500) / 0.2);
-    --border: oklch(var(--accent-950) / 0.2);
+    --muted: var(--accent-100);
+    --muted-foreground: var(--accent-800);
+    --accent: var(--accent-150, var(--accent-100));
+    --accent-foreground: var(--accent-900);
+    --destructive: 0.62 0.19 25;
+
+    --border: oklch(var(--accent-900) / 0.12);
+    --input: oklch(var(--accent-900) / 0.08);
+    --ring: oklch(var(--accent-500) / 0.32);
+
+    --chart-1: var(--accent-400);
+    --chart-2: var(--accent-500);
+    --chart-3: var(--accent-600);
+    --chart-4: var(--accent-700);
+    --chart-5: var(--accent-800);
+
+    --radius: 0.9rem;
 }
-/*
-  --------------------------------------------------------------------------
-   Dark Theme Mapping
-  --------------------------------------------------------------------------
- 
-  Overrides semantic tokens when .dark class is present.
- 
-  Example:
- 
-    <html class="dark">
- 
-  Strategy: 
-    dark background -> darker accent
-    dark text -> lighter accent
- 
-  Customize by remapping accent shades:
- 
-    --background: var(--accent-950);
- 
-*/
+
 [data-theme='dark'] {
     --background: var(--accent-950);
     --foreground: var(--accent-100);
 
+    --card: var(--accent-950);
+    --card-foreground: var(--accent-100);
+    --popover: var(--accent-900);
+    --popover-foreground: var(--accent-100);
+
     --primary: var(--accent-500);
     --primary-foreground: var(--accent-50);
-
     --secondary: var(--accent-800);
-    --secondary-foreground: var(--accent-200);
+    --secondary-foreground: var(--accent-100);
 
-    --border: oklch(var(--accent-100) / 0.25);
+    --muted: var(--accent-850, var(--accent-900));
+    --muted-foreground: var(--accent-200);
+    --accent: var(--accent-800);
+    --accent-foreground: var(--accent-100);
+
+    --border: oklch(var(--accent-100) / 0.2);
+    --input: oklch(var(--accent-100) / 0.16);
+    --ring: oklch(var(--accent-300) / 0.35);
+
+    --chart-1: var(--accent-300);
+    --chart-2: var(--accent-400);
+    --chart-3: var(--accent-500);
+    --chart-4: var(--accent-600);
+    --chart-5: var(--accent-700);
 }
-
-/*
-  --------------------------------------------------------------------------
-   Base Layer
-  --------------------------------------------------------------------------
-  
-   Global low-level styles applied before utilities.
-  
-   Includes:
-  
-   - border color from theme token
-   - default outline color
-   - box-sizing reset
-  
-   Example:
-  
-    border -> uses --color-border
-  
-   Extend here for global resets like:
-  
-    fonts
-    scrollbar
-    selection
-  
-*/
 
 @layer base {
     *,
     ::before,
     ::after {
         box-sizing: border-box;
-        border-color: var(--color-border);
-        @apply outline-accent-500 dark:outline-accent-400;
+        @apply border-border outline-ring/60;
+    }
+
+    html {
+        @apply scroll-smooth font-sans;
+    }
+
+    body {
+        @apply bg-background text-foreground antialiased;
+
+        overflow-x: hidden;
     }
 }
+@layer components {
+    .cy-pattern-bg {
+        position: relative;
+        isolation: isolate;
+        min-height: 150vh;
+    }
 
-/*
-  --------------------------------------------------------------------------
-   App Defaults
-  --------------------------------------------------------------------------
-  
-   Sets the main page background and text color using semantic tokens.  
-  
-*/
-body {
-    @apply bg-background text-foreground;
-    overflow-x: hidden;
+    .cy-pattern-bg::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        pointer-events: none;
+        z-index: -2;
+        opacity: 0.4;
+
+        background-image:
+            linear-gradient(to right, oklch(var(--foreground) / 0.08) 1px, transparent 1px),
+            linear-gradient(to bottom, oklch(var(--foreground) / 0.06) 1px, transparent 1px),
+            linear-gradient(
+                to right,
+                transparent 0,
+                transparent calc(50% - 0.5px),
+                oklch(var(--foreground) / 0.12) calc(50% - 0.5px),
+                oklch(var(--foreground) / 0.12) calc(50% + 0.5px),
+                transparent calc(50% + 0.5px),
+                transparent 100%
+            );
+
+        background-size:
+            72px 72px,
+            72px 72px,
+            100% 100%;
+
+        background-position:
+            0 0,
+            0 0,
+            0 0;
+
+        transform: translateZ(0);
+        will-change: transform;
+
+        mask-image: radial-gradient(90% 90% at 50% 20%, #000 55%, transparent);
+        -webkit-mask-image: radial-gradient(90% 90% at 50% 20%, #000 55%, transparent);
+    }
+
+    .cy-pattern-bg::after {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        pointer-events: none;
+        z-index: -1;
+        opacity: 0.45;
+
+        background-image:
+            repeating-linear-gradient(
+                135deg,
+                oklch(var(--primary) / 0.2) 0 8px,
+                transparent 8px 30px
+            ),
+            repeating-linear-gradient(
+                45deg,
+                oklch(var(--foreground) / 0.05) 0 1px,
+                transparent 1px 14px
+            );
+
+        transform: translateZ(0);
+        will-change: transform;
+
+        mask-image: radial-gradient(65% 55% at 50% 10%, #000 30%, transparent 70%);
+        -webkit-mask-image: radial-gradient(65% 55% at 50% 10%, #000 30%, transparent 70%);
+    }
+
+    .cy-pattern-glow {
+        position: absolute;
+        inset: -240px -160px -240px -160px;
+        height: 520px;
+        z-index: -3;
+        pointer-events: none;
+
+        background:
+            radial-gradient(600px 220px at 50% 40%, oklch(var(--primary) / 0.22), transparent 70%),
+            radial-gradient(
+                700px 240px at 20% 20%,
+                oklch(var(--accent-400) / 0.16),
+                transparent 70%
+            );
+
+        transform: translateZ(0);
+        will-change: transform;
+
+        filter: blur(6px);
+    }
 }
