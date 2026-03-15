@@ -1,91 +1,77 @@
-// "use client"; // enable this if you are using Nextjs
+'use client'; // enable this if you are using Nextjs
 /**
  * ThemeSwitcher component
  *
  * A simlpe example about how you can define a ThemeSwitcher component.
  *
  */
+import { useThemeHue, useThemeMode } from 'cyhip-dynamic-themes';
+import { useMemo } from 'react';
+import { availableThemes, hueScheme } from './theme.config';
 
-import { getChroma, ThemeConfig, useTheme } from 'cyhip-dynamic-themes';
-import { forwardRef, HTMLAttributes, useEffect, useState } from 'react';
-import { chromaData, hueScheme } from './theme.config';
+export function ThemeSwitcher() {
+    return (
+        <div className="auto-cols grid grid-flow-row gap-2">
+            <div className="rounded border">
+                <ColorPaletteMenu />
+            </div>
+            <div>
+                <ThemeModeMenu />
+            </div>
+        </div>
+    );
+}
 
-/**
- * This methods are used only to build a gradient sample based on the hue value.
- * Used for a visual referrence as a "icon" of the theme on the buttons.
- */
-const buildThemeSample = (hue: number) => {
-    const oklch = 'oklch(' + getChroma(5, hue, chromaData) + ')';
-    return oklch;
-};
+function ColorPaletteMenu() {
+    const { hue, setThemeHue } = useThemeHue();
 
-const availableThemes: Record<string, string> = Object.keys(hueScheme).reduce(
-    (acc, key) => {
-        const value = hueScheme[key];
-        acc[key] = buildThemeSample(value);
-        return acc;
-    },
-    {} as Record<string, string>
-);
-
-const ThemeSwitcher = forwardRef<
-    HTMLDivElement,
-    HTMLAttributes<HTMLDivElement>
->(({ ...props }, ref) => {
-    /** To initialize here you can manage cookie values to reminder user preferences. */
-    const { theme, setTheme } = useTheme();
-    const [hue, setHue] = useState(theme.hue);
-    const [darkMode, setDarkMode] = useState(false);
-
-    useEffect(() => {
-        setTheme({
-            hue,
-            mode: darkMode ? 'dark' : 'light',
-            chromaData: chromaData,
-        } as ThemeConfig);
-    }, [hue, darkMode, setTheme]);
+    const selected = useMemo(
+        () => Object.keys(hueScheme).find((key) => hueScheme[key] === hue) ?? null,
+        [hue],
+    );
 
     return (
-        <>
-            <div
-                ref={ref}
-                className="bg-accent-200/40 dark:bg-accent-700/40 grid grid-cols-3 rounded-sm gap-2 p-6"
-                {...props}
-            >
-                {Object.keys(availableThemes).map((key) => (
-                    <button
-                        key={key}
-                        className="bg-background px-4 py-1 text-sm font-medium rounded-ms border flex space-x-2 hover:ring-1 hover:ring-offset-2 hover:ring-offset-background hover:ring-primary"
-                        onClick={() => setHue(hueScheme[key])}
-                    >
-                        <span
-                            className="w-4 h-4 rounded-full"
-                            style={{
-                                background: availableThemes[key],
-                            }}
-                        ></span>
-                        <span>{key}</span>
-                    </button>
-                ))}
-                <div className="col-span-3 grid grid-cols-2 gap-x-2 mx-auto">
-                    <button
-                        className="bg-background border px-4 py-1 text-sm font-medium rounded-ms hover:ring-1 hover:ring-offset-2 hover:ring-offset-background hover:ring-primary"
-                        onClick={() => setDarkMode(false)}
-                    >
-                        Light
-                    </button>
-                    <button
-                        className="bg-background border px-4 py-1 text-sm font-medium rounded-ms hover:ring-1 hover:ring-offset-2 hover:ring-offset-background hover:ring-primary"
-                        onClick={() => setDarkMode(true)}
-                    >
-                        Dark
-                    </button>
-                </div>
-            </div>
-        </>
+        <div className="m-3 grid auto-cols-max grid-flow-col gap-4">
+            {Object.keys(availableThemes).map((key) => (
+                <button
+                    type="button"
+                    key={key}
+                    className="relative cursor-pointer"
+                    onClick={() => setThemeHue(hueScheme[key])}
+                >
+                    {selected === key && (
+                        <span className="border-accent-400 absolute -inset-1 block h-8 w-8 rounded-full border-2" />
+                    )}
+                    <span
+                        className="block h-6 w-6 rounded-full"
+                        style={{ background: availableThemes[key] }}
+                    />
+                </button>
+            ))}
+        </div>
     );
-});
+}
 
-ThemeSwitcher.displayName = 'ThemeSwitcher';
+function ThemeModeMenu() {
+    const { mode, setThemeMode } = useThemeMode();
 
-export { ThemeSwitcher };
+    const btnStyle = 'border px-2 py-2 rounded-md cursor-pointer hover:ring-1';
+    return (
+        <div className="m-2 flex justify-center gap-4">
+            <button
+                type="button"
+                className={`${btnStyle} ${mode === 'light' ? 'ring-1' : ''}`}
+                onClick={() => setThemeMode('light')}
+            >
+                Light
+            </button>
+            <button
+                type="button"
+                className={`${btnStyle} ${mode === 'dark' ? 'ring-1' : ''}`}
+                onClick={() => setThemeMode('dark')}
+            >
+                Dark
+            </button>
+        </div>
+    );
+}

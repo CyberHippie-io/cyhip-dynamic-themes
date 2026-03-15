@@ -1,22 +1,14 @@
-import { ThemeConfig, ThemeProvider } from 'cyhip-dynamic-themes';
+// src/main.tsx (Vite)
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App.tsx';
+import { AppThemeProvider } from './themes/app-theme-provider.tsx';
 import './themes/root.css';
-import { chromaData, hueScheme } from './themes/theme.config.ts';
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <ThemeProvider
-            themeConfig={
-                {
-                    hue: hueScheme.blue,
-                    mode: 'light',
-                    chromaData: chromaData,
-                } as ThemeConfig
-            }
-        >
+        <AppThemeProvider>
             <App />
-        </ThemeProvider>
-    </StrictMode>
+        </AppThemeProvider>
+    </StrictMode>,
 );

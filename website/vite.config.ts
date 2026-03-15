@@ -1,13 +1,18 @@
+import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
-import { defineConfig } from 'vite';
+import path from 'path';
+import { defineConfig, type PluginOption } from 'vite';
 
-// https://vitejs.dev/config/
+// https://vite.dev/config/
 export default defineConfig({
-    plugins: [react()],
+    plugins: [react(), tailwindcss()] as PluginOption[],
     resolve: {
         alias: {
-            '~': resolve(__dirname, 'src'),
+            '@': path.resolve(__dirname, './src'),
         },
+        dedupe: ['react', 'react-dom'],
+    },
+    server: {
+        host: '0.0.0.0',
     },
 });
