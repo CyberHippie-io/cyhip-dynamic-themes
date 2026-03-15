@@ -15,8 +15,8 @@ import { cn } from './lib/utils';
 function App() {
     return (
         <>
-            <div className="cy-landing">
-                <div className="cy-landing-glow" />
+            <div className="cy-pattern">
+                <div className="cy-pattern-glow" />
 
                 <SiteHeader props={{ className: cn() }} />
 

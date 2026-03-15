@@ -6,7 +6,7 @@ export default function SiteHeader({ props }: { props?: DivProps }) {
     const { className, ...rest } = props ?? {};
 
     return (
-        <header {...rest} className={cn(className, 'cy-container sticky top-0 z-30')}>
+        <header {...rest} className={cn(className, 'cy-container sticky top-0 z-40')}>
             <div className="bg-background/70 ring-foreground/10 mt-4 flex items-center justify-between rounded-lg px-4 py-3 ring-1 backdrop-blur">
                 <div className="flex items-center gap-3">
                     <div className="bg-primary/15 ring-primary/25 grid h-9 w-9 place-items-center rounded-lg ring-1">
@@ -19,27 +19,6 @@ export default function SiteHeader({ props }: { props?: DivProps }) {
                         </div>
                     </div>
                 </div>
-
-                {/* <nav className="hidden items-center gap-6 text-sm font-medium sm:flex">
-                    <a
-                        className="text-foreground/80 hover:text-foreground transition"
-                        href="#features"
-                    >
-                        Features
-                    </a>
-                    <a
-                        className="text-foreground/80 hover:text-foreground transition"
-                        href="#usage"
-                    >
-                        Uso
-                    </a>
-                    <a
-                        className="text-foreground/80 hover:text-foreground transition"
-                        href="#playground"
-                    >
-                        Playground
-                    </a>
-                </nav> */}
 
                 <div className="flex items-center gap-2">
                     <a
