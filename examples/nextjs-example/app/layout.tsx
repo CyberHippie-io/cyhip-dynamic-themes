@@ -19,6 +19,9 @@ const displayFont = Sora({
 export const metadata: Metadata = {
     title: 'Cyhip Dynamic Themes - Next.js Demo',
     description: 'Dashboard-style example showcasing dynamic hue themes and light/dark mode.',
+    icons: {
+        icon: '/color.svg',
+    },
 };
 
 export default function RootLayout({
