@@ -1,3 +1,4 @@
 packages:
-    - "cyhip-dynamic-themes"
-    - "dev-apps/*"
+    - 'cyhip-dynamic-themes'
+    # - 'examples/*'
+    # # - "dev-apps/*"
